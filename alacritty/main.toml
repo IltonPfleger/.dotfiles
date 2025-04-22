@@ -1,0 +1,25 @@
+[window]
+title = "Console"
+dynamic_title=false
+decorations = "None"
+opacity = 0.85
+blur=true
+level = "AlwaysOnTop"
+
+[font]
+normal = { family = "Source Code Pro", style = "Regular" }
+
+[colors.primary]
+background = '#1c1c1c'
+foreground = '#cccccc'
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Underline", blinking = "On" }
+
+[mouse]
+hide_when_typing = true
+
+
