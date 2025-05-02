@@ -92,8 +92,8 @@ augroup language_support
   " C/C++
   " Function For Call Clang-Format
   function! ClangFormat() range
-	  let l:binary = 'clang-format'
-	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, AlignConsecutiveAssignments: true, ColumnLimit: 150, BreakBeforeBraces: Linux}"'
+	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
+	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, AlignConsecutiveAssignments: true, ColumnLimit: 180, BreakBeforeBraces: Linux}"'
 	  let l:start_line = line("'<")
 	  let l:end_line = line("'>")
 	  let l:lines = getline(1, '$')
@@ -103,8 +103,13 @@ augroup language_support
 	  let l:command = l:binary . l:style . ' -assume-filename=' . expand('%:p')
 	  let l:formatted_text = system(l:command, l:text)
 
+	  if v:shell_error != 0
+		  echoerr "ERROR: ClangFormat Failed!"
+		  return
+	  endif
+
 	  let l:formatted_lines = split(l:formatted_text, "\n")
-	  silent! execute '1,' . line('$') . 'd'
+	  silent! execute '1,' . line('$') . 'delete _'
 	  call setline(1, l:formatted_lines)
 	  call setpos('.', l:current_line)
   endfunction
