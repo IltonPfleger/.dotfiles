@@ -43,8 +43,8 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias lisha='ssh -J pfleger@ssh.lisha.ufsc.br pj@150.162.62.155'
-alias lisha_ecu='ssh -J pfleger@ssh.lisha.ufsc.br lisha@150.162.62.112'
+alias lisha='ssh -J pfleger@ssh.lisha.ufsc.br pj@150.162.62.155 -X'
+alias lisha_ecu='ssh -J pfleger@ssh.lisha.ufsc.br lisha@150.162.62.227 -X'
 
 
 #-----------------------------
