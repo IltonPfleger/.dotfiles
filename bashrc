@@ -6,6 +6,7 @@
 #-----------------------------
 # Environment Variables
 #-----------------------------
+export GTK_THEME=Adwaita:dark
 export LIBVA_DRIVERS_PATH=/usr/lib/dri
 export LIBVA_DRIVER_NAME=iHD
 export HISTCONTROL=ignoreboth
@@ -74,3 +75,8 @@ get_branch() {
 
 
 PS1='\[\e[38;5;27m\]pj\[\e[0m\] :: \[\e[38;5;27;1m\]\w\[\e[0m\] :: \[\e[91;1m\]$(get_branch)\[\e[0m\] > '
+
+
+if [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] ; then
+    exec sway --config $HOME/.dotfiles/sway/config
+fi
