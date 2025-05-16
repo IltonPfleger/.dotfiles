@@ -3,7 +3,7 @@
 if ! grep -Fq "____PJ-SETUP____"  "${HOME}/.bashrc"; then
 	echo '#____PJ-SETUP____' >> $HOME/.bashrc
 	echo 'source ${HOME}/.dotfiles/bashrc' >> $HOME/.bashrc
-	sudo pacman -S git make cmake alacritty sway sway-bg rofi-wayland waybar nwg-displays grim nemo
+	sudo pacman -S git make cmake alacritty sway swaybg rofi-wayland waybar
 
 	ln -s sway/waybar/ ~/.config/waybar
 	ln -s sway/rofi ~/.config/rofi
