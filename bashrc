@@ -74,3 +74,18 @@ get_branch() {
 
 
 PS1='\[\e[38;5;27m\]pj\[\e[0m\] :: \[\e[38;5;27;1m\]\w\[\e[0m\] :: \[\e[91;1m\]$(get_branch)\[\e[0m\] > '
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+	pkill -u "$USER" -fx /usr/bin/pipewire-pulse 1>/dev/null 2>&1
+	pkill -u "$USER" -fx /usr/bin/wireplumber 1>/dev/null 2>&1
+	pkill -u "$USER" -fx /usr/bin/pipewire 1>/dev/null 2>&1
+	
+	/usr/bin/pipewire &
+	while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do
+	   sleep 1
+	done
+	
+	/usr/bin/wireplumber &
+	/usr/bin/pipewire-pulse &
+	startx
+fi
