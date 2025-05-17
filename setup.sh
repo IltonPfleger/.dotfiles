@@ -6,7 +6,7 @@ if ! grep -Fq "____PJ-SETUP____"  "${HOME}/.bashrc"; then
 	#ssh-keygen -t rsa -b 4096 -C "pfleger@lisha.ufsc.br"
 	#ssh-copy-id pfleger@ssh.lisha.ufsc.br
 	#ssh-copy-id  -o ProxyJump=pfleger@ssh.lisha.ufsc.br pj@150.162.62.155
-	sudo pacman -S gnome-shell gnome-control-center nautilus gdm vim cmake make git  chromium htop gdb alacritty xclip
 	dconf load /org/gnome/ < $HOME/.dotfiles/gnome/gnome.txt
-	gsettings set org.gnome.desktop.background picture-uri "file://$HOME/.dotfiles/backgrounds/may-the-force-be-with-you.jpg"
+	gsettings set org.gnome.desktop.background picture-uri "file:///home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg"
+	gsettings set org.gnome.desktop.screensaver picture-uri "file:///home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg"
 fi

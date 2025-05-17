@@ -1,23 +1,21 @@
-[Loupe]
-show-properties=false
-
 [control-center]
-last-panel='keyboard'
-window-state=(941, 714, false)
+last-panel='multitasking'
+window-state=(980, 640, false)
 
 [desktop/app-folders]
-folder-children=['Utilities', 'YaST', 'Pardus', 'f4f0dd03-f741-4d69-afe3-af0d672541d7']
+folder-children=['System', 'Utilities', 'YaST', 'Pardus']
 
 [desktop/app-folders/folders/Pardus]
 categories=['X-Pardus-Apps']
 name='X-Pardus-Apps.directory'
 translate=true
 
+[desktop/app-folders/folders/System]
+name='X-GNOME-Shell-System.directory'
+translate=true
+
 [desktop/app-folders/folders/Utilities]
-apps=['org.freedesktop.GnomeAbrt.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.freedesktop.MalcontentControl.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Usage.desktop']
-categories=['X-GNOME-Utilities']
-excluded-apps=['org.gnome.Loupe.desktop', 'org.gnome.Evince.desktop', 'org.gnome.tweaks.desktop']
-name='X-GNOME-Utilities.directory'
+name='X-GNOME-Shell-Utilities.directory'
 translate=true
 
 [desktop/app-folders/folders/YaST]
@@ -25,66 +23,36 @@ categories=['X-SuSE-YaST']
 name='suse-yast.directory'
 translate=true
 
-[desktop/app-folders/folders/f4f0dd03-f741-4d69-afe3-af0d672541d7]
-apps=['htop.desktop', 'qv4l2.desktop', 'avahi-discover.desktop', 'bvnc.desktop', 'bssh.desktop', 'org.gnome.Extensions.desktop', 'qvidcap.desktop', 'vim.desktop']
-name='Arch Stuff'
-translate=false
-
 [desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/pj/.config/background'
-picture-uri-dark='file:///home/pj/.config/background'
+picture-uri='file:///home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg'
+picture-uri-dark='file:///home/pj/.local/share/backgrounds/2025-02-27-22-28-05-mystical-night-in-town.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
+
+[desktop/break-reminders/eyesight]
+play-sound=true
+
+[desktop/break-reminders/movement]
+duration-seconds=uint32 300
+interval-seconds=uint32 1800
+play-sound=true
 
 [desktop/input-sources]
 mru-sources=[('xkb', 'us')]
 sources=[('xkb', 'br')]
 
 [desktop/interface]
-accent-color='blue'
 color-scheme='prefer-dark'
-enable-animations=false
-show-battery-percentage=false
-
-[desktop/media-handling]
-autorun-never=true
-
-[desktop/notifications]
-application-children=['gnome-power-panel', 'org-gnome-evince', 'chromium', 'alacritty', 'org-gnome-nautilus']
-show-banners=false
-show-in-lock-screen=false
-
-[desktop/notifications/application/alacritty]
-application-id='Alacritty.desktop'
-
-[desktop/notifications/application/chromium]
-application-id='chromium.desktop'
-
-[desktop/notifications/application/gnome-power-panel]
-application-id='gnome-power-panel.desktop'
-
-[desktop/notifications/application/org-gnome-evince]
-application-id='org.gnome.Evince.desktop'
-
-[desktop/notifications/application/org-gnome-nautilus]
-application-id='org.gnome.Nautilus.desktop'
-
-[desktop/peripherals/keyboard]
-numlock-state=true
 
 [desktop/peripherals/touchpad]
-send-events='enabled'
 two-finger-scrolling-enabled=true
-
-[desktop/privacy]
-remember-recent-files=false
 
 [desktop/screensaver]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/pj/.local/share/backgrounds/2025-02-27-22-28-05-mystical-night-in-town.jpg'
+picture-uri='file:///home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -92,113 +60,93 @@ secondary-color='#000000000000'
 sort-order=['org.gnome.Settings.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Nautilus.desktop']
 
 [desktop/wm/keybindings]
+activate-window-menu=@as []
+begin-move=@as []
+begin-resize=@as []
 close=['<Super>q']
+cycle-group=@as []
+cycle-group-backward=@as []
+cycle-panels=@as []
+cycle-panels-backward=@as []
+cycle-windows=@as []
+cycle-windows-backward=@as []
 move-to-workspace-1=['<Shift><Super>1']
 move-to-workspace-2=['<Shift><Super>2']
 move-to-workspace-3=['<Shift><Super>3']
 move-to-workspace-4=['<Shift><Super>4']
+move-to-workspace-5=['<Shift><Super>5']
+move-to-workspace-6=['<Shift><Super>6']
+move-to-workspace-7=['<Shift><Super>7']
+move-to-workspace-8=['<Shift><Super>8']
+move-to-workspace-9=['<Shift><Super>9']
+move-to-workspace-last=@as []
+move-to-workspace-left=@as []
+move-to-workspace-right=@as []
+panel-run-dialog=['<Super>d']
 switch-applications=@as []
 switch-applications-backward=@as []
+switch-group=@as []
+switch-group-backward=@as []
+switch-panels=@as []
+switch-panels-backward=@as []
 switch-to-workspace-1=['<Super>1']
 switch-to-workspace-2=['<Super>2']
 switch-to-workspace-3=['<Super>3']
 switch-to-workspace-4=['<Super>4']
+switch-to-workspace-5=['<Super>5']
+switch-to-workspace-6=['<Super>6']
+switch-to-workspace-7=['<Super>7']
+switch-to-workspace-8=['<Super>8']
+switch-to-workspace-9=['<Super>9']
+switch-to-workspace-last=@as []
+switch-to-workspace-left=@as []
+switch-to-workspace-right=@as []
 switch-windows=['<Super>Tab']
 switch-windows-backward=['<Shift><Super>Tab']
-toggle-maximized=['<Super>m']
+toggle-fullscreen=@as []
+toggle-maximized=@as []
+unmaximize=@as []
 
-[epiphany]
-default-search-engine='DuckDuckGo'
-homepage-url=''
-search-engine-providers=[{'url': <'https://www.bing.com/search?q=%s'>, 'bang': <'!b'>, 'name': <'Bing'>}, {'url': <'https://duckduckgo.com/?q=%s&t=epiphany&kd=-1'>, 'bang': <'!ddg'>, 'name': <'DuckDuckGo'>}, {'url': <'https://www.google.com/search?q=%s'>, 'bang': <'!g'>, 'name': <'Google'>}]
-
-[epiphany/reader]
-font-style='serif'
-
-[epiphany/state]
-is-maximized=true
-window-size=(1920, 1048)
-
-[epiphany/web]
-default-zoom-level=1.0
-enable-mouse-gestures=true
-enable-navigation-gestures=false
-enable-user-css=false
-enable-user-js=false
-last-upload-directory='/home/pj/Pictures/Screenshots'
-show-developer-actions=true
-switch-to-new-tab=true
-use-gnome-fonts=true
-
-[evince]
-document-directory=@ms 'file:///home/pj/Downloads/Livros'
-
-[evince/default]
-continuous=true
-dual-page=true
-dual-page-odd-left=false
-enable-spellchecking=true
-fullscreen=false
-inverted-colors=false
-show-sidebar=true
-sidebar-page='thumbnails'
-sidebar-size=246
-sizing-mode='free'
-window-ratio=(1.8807988356056771, 1.1354998369322462)
-zoom=0.48532984384512351
+[desktop/wm/preferences]
+num-workspaces=9
 
 [mutter]
 dynamic-workspaces=false
-experimental-features=@as []
+workspaces-only-on-primary=false
 
 [nautilus/preferences]
-default-folder-viewer='list-view'
+default-folder-viewer='icon-view'
 migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 
 [nautilus/window-state]
-initial-size=(890, 550)
 initial-size-file-chooser=(890, 550)
-maximized=false
 
-[nm-applet/eap/4ee4456a-11c8-489f-afb1-15f8f6825974]
-ignore-ca-cert=true
-ignore-phase2-ca-cert=false
+[portal/filechooser/org.gnome.Settings]
+last-folder-path='/home/pj/Pictures'
 
 [settings-daemon/plugins/color]
-night-light-enabled=false
 night-light-schedule-automatic=false
-night-light-temperature=uint32 1700
 
 [settings-daemon/plugins/media-keys]
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
-home=@as []
 
 [settings-daemon/plugins/media-keys/custom-keybindings/custom0]
-binding='<Super>BackSpace'
+binding='<Super>Return'
 command='/home/pj/.dotfiles/alacritty/start.sh'
-name='Terminal'
+name='Console'
 
 [settings-daemon/plugins/media-keys/custom-keybindings/custom1]
 binding='<Super>e'
 command='nautilus'
 name='Explorer'
 
-[settings-daemon/plugins/power]
-idle-dim=true
-power-button-action='nothing'
-
 [shell]
-app-picker-layout=[{'f4f0dd03-f741-4d69-afe3-af0d672541d7': <{'position': <0>}>, 'org.gnome.Settings.desktop': <{'position': <1>}>, 'org.gnome.Loupe.desktop': <{'position': <2>}>, 'org.gnome.Evince.desktop': <{'position': <3>}>, 'org.gnome.Decibels.desktop': <{'position': <4>}>, 'org.gnome.Totem.desktop': <{'position': <5>}>, 'Utilities': <{'position': <6>}>, 'org.gnome.tweaks.desktop': <{'position': <7>}>}]
-favorite-apps=['org.gnome.Nautilus.desktop', 'Alacritty.desktop', 'chromium.desktop']
-welcome-dialog-last-shown-version='47.4'
+command-history=['chrome', 'firefox']
+welcome-dialog-last-shown-version='48.1'
 
 [shell/keybindings]
 switch-to-application-1=@as []
 switch-to-application-2=@as []
 switch-to-application-3=@as []
 switch-to-application-4=@as []
-toggle-message-tray=@as []
-
-[tweaks]
-show-extensions-notice=false

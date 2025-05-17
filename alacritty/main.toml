@@ -1,13 +1,10 @@
 [window]
-title = "Console"
-dynamic_title=false
 decorations = "None"
 opacity = 0.85
-blur=true
 level = "AlwaysOnTop"
 
 [font]
-normal = { family = "Source Code Pro", style = "Regular" }
+normal = { family = "Cascadia Code", style = "Regular" }
 
 [colors.primary]
 background = '#1c1c1c'

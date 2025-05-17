@@ -3,6 +3,7 @@
 "----------------------------------------------------------
 syntax enable
 filetype indent on
+filetype plugin on
 set encoding=utf-8
 set shell=$SHELL
 
@@ -15,24 +16,31 @@ set background=dark
 set number
 set relativenumber
 set cursorline
-set title
-set showmatch
 set laststatus=2
 set nowrap
+set guiheadroom=0
 
 hi CursorLineNr gui=bold cterm=bold term=bold guibg=#303030
+hi Normal guibg=NONE ctermbg=NONE
 
 "----------------------------------------------------------
 " Editing Behavior
 "----------------------------------------------------------
 set hidden
+set spell
 set autoindent
 set smartindent
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set shiftround
+
+"----------------------------------------------------------
+" Search
+"----------------------------------------------------------
+set hlsearch
+nnoremap <silent> <Esc> :noh<CR>
+
 
 "----------------------------------------------------------
 " File Management
@@ -41,12 +49,6 @@ set nobackup
 set noswapfile
 set wildmenu
 set wildcharm=<Tab>
-
-"----------------------------------------------------------
-" Window Management
-"----------------------------------------------------------
-set splitbelow
-set termwinsize=10x0
 
 "----------------------------------------------------------
 " Status Line Configuration
@@ -73,16 +75,24 @@ nnoremap <silent> w :w<CR>
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap vv <C-v><CR>
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
-vnoremap Y "+y
 
-" Improved safe replace command
-"nnoremap <silent> r :let @/=input('Pattern: ')<CR>:%s//\=input('Replace: ')/g<CR>
+"----------------------------------------------------------
+" Replace command
+"----------------------------------------------------------
 nnoremap <silent> r :exec '%s/' . input('Pattern: ') . '/' . input('Replace: ') . '/g'<CR>
 
+"----------------------------------------------------------
 " Autocomplete suggestions in tab
+"----------------------------------------------------------
 inoremap <expr> <Tab> getline('.')[col('.')-2] !~ '^\s\?$' \|\| pumvisible() ? '<C-N>' : '<Tab>'
+
+"----------------------------------------------------------
+" Back to line when exit
+"----------------------------------------------------------
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
 
 "----------------------------------------------------------
 " Language-Specific Configuration
@@ -113,19 +123,7 @@ augroup language_support
 	  call setline(1, l:formatted_lines)
 	  call setpos('.', l:current_line)
   endfunction
-
   autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hpp call ClangFormat()
-  
-  " Python
-  autocmd FileType python nnoremap <buffer> <F1> :w \| !python3 %<CR>
-  
-  " JavaScript
-  autocmd FileType javascript nnoremap <buffer> <F1> :w \| !node %<CR>
-  
-  " Go
-  autocmd FileType go setlocal noexpandtab
-  autocmd FileType go setlocal tabstop=4
-  autocmd FileType go setlocal shiftwidth=4
 augroup END
 
 "----------------------------------------------------------
@@ -137,13 +135,13 @@ augroup compilation
   autocmd FileType c nnoremap <F1> :w \| :!gcc -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
   autocmd FileType cpp nnoremap <F1> :w \| :!g++ -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
   autocmd FileType c,cpp nnoremap <F2> :w \|:!make<CR>
+
+  " Python
+  autocmd FileType python nnoremap <buffer> <F1> :w \| !python3 %<CR>
+  
+  " JavaScript
+  autocmd FileType javascript nnoremap <buffer> <F1> :w \| !node %<CR>
 augroup END
 
-"----------------------------------------------------------
-" Maintenance and Cleanup
-"----------------------------------------------------------
 " Remove deprecated configuration
 let c_no_curly_error=1
-
-" Ensure clean exit on :q
-autocmd BufEnter * if &buftype == 'terminal' | startinsert | endif
