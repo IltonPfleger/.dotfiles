@@ -2,4 +2,5 @@ setxkbmap -model abnt2 -layout br
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Tapping Enabled" 1
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Natural Scrolling Enabled" 1
 slstatus &
+feh --bg-scale home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg
 dbus-run-session dwm
