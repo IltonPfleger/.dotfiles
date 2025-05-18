@@ -7,7 +7,7 @@ blur=true
 level = "AlwaysOnTop"
 
 [font]
-normal = { family = "Cascadia Code", style = "Regular" }
+normal = { family = "Fira Mono", style = "Regular" }
 size=6.5
 
 [colors.primary]
