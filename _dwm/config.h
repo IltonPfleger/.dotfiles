@@ -10,12 +10,14 @@ static const unsigned int snap     = 32; /* snap pixel */
 static const int showbar           = 1;  /* 0 means no bar */
 static const int topbar            = 1;  /* 0 means bottom bar */
 static const char *fonts[]         = {"monospace:size=10", "Font Awesome 6 Free Solid:size=10"};
-static const char col_gray1[]      = "#222222";
-static const char col_gray2[]      = "#444444";
-static const char col_gray3[]      = "#bbbbbb";
-static const char col_gray4[]      = "#eeeeee";
-static const char col_cyan[]       = "#005577";
-static const char *colors[][3]     = {
+
+// static const char dmenufont[]      = "monospace:size=10";
+static const char col_gray1[]  = "#222222";
+static const char col_gray2[]  = "#444444";
+static const char col_gray3[]  = "#bbbbbb";
+static const char col_gray4[]  = "#eeeeee";
+static const char col_cyan[]   = "#005577";
+static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
     [SchemeSel]  = {col_gray4, col_cyan, col_cyan},
@@ -95,10 +97,16 @@ static const Key keys[] = {
     {MODKEY, XK_d, spawn, {.v = dmenucmd}},
     {MODKEY | ShiftMask, XK_j, movestack, {.i = +1}},
     {MODKEY | ShiftMask, XK_k, movestack, {.i = -1}},
+
     {MODKEY, XK_Left, focusdir, {.i = 0}},   // left
     {MODKEY, XK_Right, focusdir, {.i = 1}},  // right
     {MODKEY, XK_Up, focusdir, {.i = 2}},     // up
     {MODKEY, XK_Down, focusdir, {.i = 3}},   // down
+    {MODKEY, XK_h, focusdir, {.i = 0}},      // left
+    {MODKEY, XK_l, focusdir, {.i = 1}},      // right
+    {MODKEY, XK_k, focusdir, {.i = 2}},      // up
+    {MODKEY, XK_j, focusdir, {.i = 3}},      // down
+
     {MODKEY, XK_q, killclient, {0}},
     {0, XF86XK_AudioLowerVolume, spawn, {.v = downvol}},
     {0, XF86XK_AudioMute, spawn, {.v = mutevol}},
