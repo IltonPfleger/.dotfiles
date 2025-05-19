@@ -3,7 +3,7 @@
 if ! grep -Fq "____PJ-SETUP____"  "${HOME}/.bashrc"; then
 	echo '#____PJ-SETUP____' >> $HOME/.bashrc
 	echo 'source ${HOME}/.dotfiles/bashrc' >> $HOME/.bashrc
-	sudo pacman -S xorg-server xorg-xinit libxft ttf-fira-mono rofi ttf-font-awesome xorg-xrandr feh
+	sudo pacman -S xorg-server xorg-xinit libxft ttf-fira-mono rofi ttf-font-awesome xorg-xrandr xorg-xset feh network-manager-applet
 	sudo pacman -S pipewire pipewire-alsa pipewire-pulse wireplumber rtkit pavucontrol
 	sudo usermod -aG audio $USER
 	sudo usermod -aG video $USER

@@ -3,4 +3,7 @@ xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Tapping Enabled" 1
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Natural Scrolling Enabled" 1
 slstatus &
 feh --bg-scale /home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg
+xrandr --output HDMI-1 --primary --auto --left-of DP-1
+xset dpms 0 0 300
+nm-applet &
 dbus-run-session dwm
