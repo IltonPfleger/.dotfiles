@@ -55,7 +55,7 @@ char *get_date_and_time()
 char *get_volume()
 {
     static char str[8];
-    static char const *NO_AUDIO = "";
+    static char const *NO_AUDIO = " ";
     FILE *file                  = popen("wpctl get-volume @DEFAULT_SINK@", "r");
     char buffer[128];
 
@@ -64,7 +64,10 @@ char *get_volume()
     } else {
         float volume = 0.0f;
         int muted    = strstr(buffer, "MUTED") != NULL;
-        if (sscanf(buffer, "Volume: %f", &volume) == 1 && !muted) sprintf(str, "  %d%%", (int)(volume * 100));
+        if (sscanf(buffer, "Volume: %f", &volume) == 1 && !muted)
+            sprintf(str, "  %d%%", (int)(volume * 100));
+        else
+            strcpy(str, NO_AUDIO);
     }
 
     pclose(file);
