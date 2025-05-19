@@ -21,7 +21,6 @@ echo -e "Welcome back, \033[1;32m$USER!\033[0m"
 echo -e "System: \033[1;34m$(uname -srm)\033[0m"
 echo -e "Today is: \033[1;33m$(date '+%Y-%m-%d %H:%M:%S')\033[0m"
 echo -e "Uptime: \033[1;35m$(uptime -p)\033[0m"
-neofetch
 
 #-----------------------------
 # Firmware Tools

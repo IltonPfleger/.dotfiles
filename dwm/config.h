@@ -64,14 +64,13 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2]            = "0";
-static const char *dmenucmd[]      = {"rofi", "-show", "drun", "-theme", "~/.dotfiles/rofi/config.rasi"};
+static const char *dmenucmd[]      = {"/home/pj/.dotfiles/dwm/launcher.sh"};
 static const char *termcmd[]       = {"alacritty", "--config-file", "/home/pj/.dotfiles/alacritty/main.toml", NULL};
 static const char *upvol[]         = {"/usr/bin/wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL};
 static const char *downvol[]       = {"/usr/bin/wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL};
 static const char *mutevol[]       = {"/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL};
 static const char *brupcmd[]       = {"brightnessctl", "set", "10%+", NULL};
 static const char *brdowncmd[]     = {"brightnessctl", "set", "10%-", NULL};
-static const char *screenshotcmd[] = {"scrot", "~/Pictures/%Y-%m-%d-%H%M%S.png", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
