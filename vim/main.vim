@@ -123,7 +123,7 @@ augroup language_support
 	  call setline(1, l:formatted_lines)
 	  call setpos('.', l:current_line)
   endfunction
-  autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.hpp call ClangFormat()
+  autocmd filetype *.c,*.cc,*.cpp,*.h,*.hpp nnoremap gg=G :call ClangFormat() \| w<CR>
 augroup END
 
 "----------------------------------------------------------

@@ -11,6 +11,7 @@ name='X-Pardus-Apps.directory'
 translate=true
 
 [desktop/app-folders/folders/System]
+apps=['nm-connection-editor.desktop']
 name='X-GNOME-Shell-System.directory'
 translate=true
 
@@ -26,8 +27,8 @@ translate=true
 [desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg'
-picture-uri-dark='file:///home/pj/.local/share/backgrounds/2025-02-27-22-28-05-mystical-night-in-town.jpg'
+picture-uri='file:///home/pj/.local/share/backgrounds/2025-05-19-21-20-48-may-the-force-be-with-you.jpg'
+picture-uri-dark='file:///home/pj/.local/share/backgrounds/2025-05-19-21-20-48-may-the-force-be-with-you.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -52,7 +53,7 @@ two-finger-scrolling-enabled=true
 [desktop/screensaver]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg'
+picture-uri='file:///home/pj/.local/share/backgrounds/2025-05-19-21-20-48-may-the-force-be-with-you.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -111,7 +112,7 @@ unmaximize=@as []
 num-workspaces=9
 
 [mutter]
-dynamic-workspaces=false
+dynamic-workspaces=true
 workspaces-only-on-primary=false
 
 [nautilus/preferences]
@@ -122,8 +123,12 @@ search-filter-time-type='last_modified'
 [nautilus/window-state]
 initial-size-file-chooser=(890, 550)
 
+[nm-applet/eap/50075a82-f268-4322-a4b3-aa3dacc0c216]
+ignore-ca-cert=true
+ignore-phase2-ca-cert=false
+
 [portal/filechooser/org.gnome.Settings]
-last-folder-path='/home/pj/Pictures'
+last-folder-path='/home/pj/.dotfiles/backgrounds'
 
 [settings-daemon/plugins/color]
 night-light-schedule-automatic=false

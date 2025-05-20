@@ -4,7 +4,8 @@ opacity = 0.85
 level = "AlwaysOnTop"
 
 [font]
-normal = { family = "Cascadia Code", style = "Regular" }
+normal = { family = "Fira Code", style = "Regular" }
+size=10
 
 [colors.primary]
 background = '#1c1c1c'
