@@ -11,6 +11,7 @@ export LIBVA_DRIVERS_PATH=/usr/lib/dri
 export LIBVA_DRIVER_NAME=iHD
 export HISTCONTROL=ignoreboth
 export HISTSIZE=50
+export LANG="en_US.UTF-8"
 
 #-----------------------------
 # Welcome Message
@@ -77,6 +78,7 @@ get_branch() {
 PS1='\[\e[38;5;27m\]pj\[\e[0m\] :: \[\e[38;5;27;1m\]\w\[\e[0m\] :: \[\e[91;1m\]$(get_branch)\[\e[0m\] > '
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+	export DISPLAY=:0
 	pkill -u "$USER" -fx /usr/bin/pipewire-pulse 1>/dev/null 2>&1
 	pkill -u "$USER" -fx /usr/bin/wireplumber 1>/dev/null 2>&1
 	pkill -u "$USER" -fx /usr/bin/pipewire 1>/dev/null 2>&1
@@ -88,5 +90,6 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	
 	/usr/bin/wireplumber &
 	/usr/bin/pipewire-pulse &
-	startx
+
+	env XINITRC=$HOME/.dotfiles/startx startx
 fi

@@ -7,12 +7,14 @@
 
 char *get_battery()
 {
-    static char str[8];
+    static char str[16];
     int battery;
     FILE *file = fopen("/sys/class/power_supply/BAT1/capacity", "r");
+
     if (fscanf(file, "%d", &battery) != 1) {
         strcpy(str, "N/A");
-    } else {
+	}
+	else {
         if (battery > 80) {
             sprintf(str, " %d%%", battery);
         } else if (battery > 60) {
@@ -26,6 +28,14 @@ char *get_battery()
         }
     }
     fclose(file);
+
+	file = fopen("/sys/class/power_supply/BAT1/status", "r");
+	char isCharging = fgetc(file);
+	if(isCharging == 'C') {
+		sprintf(str, " %d%%", battery);
+	}
+    fclose(file);
+
     return str;
 }
 

@@ -4,5 +4,5 @@ xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Natural Scrolling Ena
 feh --bg-scale /home/pj/.dotfiles/backgrounds/may-the-force-be-with-you.jpg
 nm-applet &
 blueman-applet &
-$HOME/.dotfiles/status/status&
+$HOME/.dotfiles/bar/bar&
 dbus-run-session dwm

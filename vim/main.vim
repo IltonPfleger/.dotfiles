@@ -123,7 +123,7 @@ augroup language_support
 	  call setline(1, l:formatted_lines)
 	  call setpos('.', l:current_line)
   endfunction
-  autocmd FileType c,cpp,h,hpp nnoremap <buffer> gg=G :call ClangFormat()<CR>
+  autocmd FileType c,cpp,h,objc,objective-c nnoremap <buffer> <leader>= :call ClangFormat()<CR>
 augroup END
 
 "----------------------------------------------------------
