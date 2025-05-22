@@ -10,11 +10,11 @@ char *get_battery()
     static char str[16];
     int battery;
     FILE *file = fopen("/sys/class/power_supply/BAT1/capacity", "r");
-
-    if (fscanf(file, "%d", &battery) != 1) {
-        strcpy(str, "N/A");
+	if(file == NULL) {
+		str[0] = '\0';
 	}
 	else {
+		fscanf(file, "%d", &battery);
 		fclose(file);
 		file = fopen("/sys/class/power_supply/BAT1/status", "r");
 		char isCharging = fgetc(file);
@@ -31,8 +31,8 @@ char *get_battery()
         } else {
             sprintf(str, " %d%%", battery);
         }
+		fclose(file);
     }
-    fclose(file);
     return str;
 }
 
@@ -42,12 +42,13 @@ char *get_backlight()
     static char str[16];
     int backlight;
     FILE *file = fopen("/sys/class/backlight/intel_backlight/brightness", "r");
-    if (file == NULL || fscanf(file, "%d", &backlight) != 1) {
-        strcpy(str, "N/A");
+    if (file == NULL) {
+		str[0] = '\0';
     } else {
+		fscanf(file, "%d", &backlight);
         sprintf(str, " %d%%", (backlight*100)/max_backlight);
+		fclose(file);
     }
-    fclose(file);
     return str;
 }
 
