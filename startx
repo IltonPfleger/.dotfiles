@@ -1,8 +1,9 @@
 feh --bg-scale /home/pj/.dotfiles/backgrounds/mystical-night-in-town.jpg
-nm-applet 1>/dev/null 2>1&
-$HOME/.dotfiles/bar/bar 1>/dev/null 2>1&
-picom --config $HOME/.dotfiles/picom.conf 1>/dev/null 2>1&
+nm-applet > /dev/null 2>&1 &
+$HOME/.dotfiles/bar/bar >/dev/null 2>&1 &
+picom --config $HOME/.dotfiles/picom.conf >/dev/null 2>&1 &
 setxkbmap -model abnt2 -layout br
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Tapping Enabled" 1
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Natural Scrolling Enabled" 1
+xrandr --output DP-1 --mode 2560x1440 --left-of HDMI-1 --primary --output HDMI-1 --mode 1920x1080
 dbus-run-session dwm
