@@ -91,5 +91,5 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	/usr/bin/wireplumber &
 	/usr/bin/pipewire-pulse &
 
-	env XINITRC=$HOME/.dotfiles/startx startx
+	XINITRC=$HOME/.dotfiles/startx startx
 fi

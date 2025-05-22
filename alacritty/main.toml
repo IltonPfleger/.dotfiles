@@ -4,7 +4,7 @@ dynamic_title=false
 decorations = "None"
 opacity = 0.85
 blur=true
-level = "AlwaysOnTop"
+dynamic_padding = true
 
 [font]
 normal = { family = "Fira Mono", style = "Regular" }
