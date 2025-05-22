@@ -1,9 +1,8 @@
+feh --bg-scale /home/pj/.dotfiles/backgrounds/mystical-night-in-town.jpg
+nm-applet 1>/dev/null 2>1&
+$HOME/.dotfiles/bar/bar 1>/dev/null 2>1&
+picom --config $HOME/.dotfiles/picom.conf 1>/dev/null 2>1&
 setxkbmap -model abnt2 -layout br
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Tapping Enabled" 1
 xinput set-prop "ELAN0B00:00 04F3:3261 Touchpad" "libinput Natural Scrolling Enabled" 1
-feh --bg-scale /home/pj/.dotfiles/backgrounds/mystical-night-in-town.jpg
-nm-applet &
-blueman-applet &
-$HOME/.dotfiles/bar/bar&
-picom --config $HOME/.dotfiles/picom.conf&
 dbus-run-session dwm
