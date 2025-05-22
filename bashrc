@@ -82,14 +82,10 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	pkill -u "$USER" -fx /usr/bin/pipewire-pulse 1>/dev/null 2>&1
 	pkill -u "$USER" -fx /usr/bin/wireplumber 1>/dev/null 2>&1
 	pkill -u "$USER" -fx /usr/bin/pipewire 1>/dev/null 2>&1
-	
 	/usr/bin/pipewire > /dev/null 2>&1 &
-
-	while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do
-	   sleep 1
-	done
-	
+	while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do sleep 1; done
 	/usr/bin/wireplumber > /dev/null 2>&1 &
 	/usr/bin/pipewire-pulse > /dev/null 2>&1 &
+
 	XINITRC=$HOME/.dotfiles/startx startx
 fi

@@ -2,13 +2,11 @@
 title = "Console"
 dynamic_title=false
 decorations = "None"
-opacity = 0.85
-blur=true
-dynamic_padding = true
+opacity = 0.9
 
 [font]
 normal = { family = "Fira Mono", style = "Regular" }
-size=8
+size=7
 
 [colors.primary]
 background = '#1c1c1c'

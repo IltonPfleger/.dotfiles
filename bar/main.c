@@ -98,6 +98,7 @@ int main(int, char **)
         sprintf(str, "%s | %s | %s | %s", get_battery(), get_backlight(), get_volume(), get_date_and_time());
         XStoreName(display, root, str);
         XSync(display, False);
+		usleep(500);
     }
     XCloseDisplay(display);
     return 0;
