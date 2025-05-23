@@ -56,14 +56,14 @@ char *get_date_and_time()
 	static char str[64];
 	time_t t           = time(NULL);
 	struct tm *tm_info = localtime(&t);
-	strftime(str, sizeof(str), "%A, %B %d, %Y | %H:%M", tm_info);
+	strftime(str, sizeof(str), " %A, %B %d, %Y |  %H:%M", tm_info);
 	return str;
 }
 
 char *get_volume()
 {
 	static char str[8];
-	static char const *NO_AUDIO = " ";
+	static char const *NO_AUDIO = "";
 	FILE *file                  = popen("wpctl get-volume @DEFAULT_SINK@", "r");
 	char buffer[128];
 
@@ -73,7 +73,7 @@ char *get_volume()
 		float volume = 0.0f;
 		int muted    = strstr(buffer, "MUTED") != NULL;
 		if (sscanf(buffer, "Volume: %f", &volume) == 1 && !muted)
-			sprintf(str, "  %d%%", (int)(volume * 100));
+			sprintf(str, " %d%%", (int)(volume * 100));
 		else
 			strcpy(str, NO_AUDIO);
 	}
@@ -86,7 +86,7 @@ int main(int, char **)
 {
 	printf("{ \"version\": 1 }\n[\n");
 		while (true) {
-			printf("%s | ", get_battery());
+			printf(" %s | ", get_battery());
 			printf("%s | ", get_backlight());
 			printf("%s | ", get_volume());
 			printf("%s", get_date_and_time());
