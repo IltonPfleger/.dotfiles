@@ -2,4 +2,4 @@ pkgname=dwm
 pkgver=3.0
 pkgrel=1
 arch=('x86_64')
-depends=('feh' 'maim' 'xorg-server' 'xorg-xinit' 'dmenu' 'libx11' 'libxinerama' 'libxft' 'freetype2' 'xorg-xinput' 'picom' 'ranger' 'xclip' 'ttf-font-awesome')
+depends=('wlroots>=0.16' 'tllist' 'fcft' 'wmenu' 'xdg-desktop-portal' 'xdg-desktop-portal-gtk' 'ttf-font-awesome' 'ranger' 'wl-clipboard' 'slurp')

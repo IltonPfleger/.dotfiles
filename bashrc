@@ -60,8 +60,8 @@ alias clang-format='${HOME}/.dotfiles/bin/clang-format'
 #Clipboard handling
 #----------------------------- 
 if command -v xclip &>/dev/null; then
-    alias c='xclip -selection clipboard'
-    alias p='xclip -o -selection clipboard'
+    alias c='wl-copy'
+    alias p='wl-paste'
 fi
 
 
@@ -78,7 +78,11 @@ get_branch() {
 PS1='\[\e[38;5;27m\]pj\[\e[0m\] :: \[\e[38;5;27;1m\]\w\[\e[0m\] :: \[\e[91;1m\]$(get_branch)\[\e[0m\] > '
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-	export DISPLAY=:0
+	export PATH=$PATH:$HOME/.dotfiles/scripts/
+	export MOZ_ENABLE_WAYLAND=1
+	export XDG_SESSION_TYPE=wayland
+	export XDG_CURRENT_DESKTOP=sway
+
 	pkill -u "$USER" -fx /usr/bin/pipewire-pulse 1>/dev/null 2>&1
 	pkill -u "$USER" -fx /usr/bin/wireplumber 1>/dev/null 2>&1
 	pkill -u "$USER" -fx /usr/bin/pipewire 1>/dev/null 2>&1
@@ -86,6 +90,7 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do sleep 1; done
 	/usr/bin/wireplumber > /dev/null 2>&1 &
 	/usr/bin/pipewire-pulse > /dev/null 2>&1 &
-
-	XINITRC=$HOME/.dotfiles/startx startx
+	xdg-dektop-portal -r > /dev/null 2>&1 &
+	xdg-dektop-portal-wlr > /dev/null 2>&1 &
+	$HOME/.dotfiles/bar/bar | dbus-run-session dwl
 fi

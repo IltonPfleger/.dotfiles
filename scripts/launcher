@@ -1,0 +1,18 @@
+#!/bin/bash
+APP=$(find /usr/share/applications -name '*.desktop' \
+    | while IFS= read -r f; do
+        grep -qi '^NoDisplay=true' "$f" && continue
+        NAME=$(grep -m1 '^Name=' "$f" | sed 's/^Name=//')
+        [ -n "$NAME" ] && echo "$NAME"
+    done | sort -f | wmenu -i)
+
+if [ -n "$APP" ]; then
+    find /usr/share/applications -name "*.desktop" | while IFS= read -r f; do
+        NAME=$(grep -m1 '^Name=' "$f" | sed 's/^Name=//')
+        if [ "$NAME" = "$APP" ]; then
+            CMD=$(grep -m1 '^Exec=' "$f" | sed -E 's/^Exec=//; s/ *%[a-zA-Z]//g')
+            "$CMD" &
+            break
+        fi
+    done
+fi

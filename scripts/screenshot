@@ -1,0 +1,12 @@
+#!/bin/bash
+mkdir -p ~/Pictures
+tempfile=$(mktemp)
+slurp | tee "$tempfile"
+region=$(cat "$tempfile")
+rm "$tempfile"
+
+if [ -n "$region" ]; then
+	filename=~/Pictures/Screenshot_$(date +%Y%m%d_%H%M%S).png
+	grim -g "$region" "$filename"
+	wl-copy < "$filename"
+fi

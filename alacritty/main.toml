@@ -6,7 +6,7 @@ opacity = 0.9
 
 [font]
 normal = { family = "Fira Mono", style = "Regular" }
-size=7
+size=10
 
 [colors.primary]
 background = '#1c1c1c'
