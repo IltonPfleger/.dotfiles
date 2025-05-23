@@ -16,13 +16,13 @@ static const int topbar                    = 1; /* 0 means bottom bar */
 static const char *fonts[]                 = {"monospace:size=10"};
 static const float rootcolor[]             = COLOR(0x000000ff);
 static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
-static const uint32_t primary = 0x458588ff;
-static const uint32_t bg = 0x1d2021ff;
-static const uint32_t fg = 0xebdbb2ff;
+static const uint32_t primary = 0x005577ff;
+static const uint32_t bg = 0x00000000;
+static const uint32_t fg = 0xeeeeeeff;
 static uint32_t colors[][3]                = {
 	/*               fg          bg          border    */
 	[SchemeNorm] = { fg, bg, 0x444444ff },
-	[SchemeSel]  = { bg, primary, primary },
+	[SchemeSel]  = { fg, primary, primary },
 	[SchemeUrg]  = { 0,          0,          0x770000ff },
 };
 

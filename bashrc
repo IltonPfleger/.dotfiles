@@ -92,6 +92,6 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	/usr/bin/pipewire-pulse > /dev/null 2>&1 &
 	xdg-dektop-portal -r > /dev/null 2>&1 &
 	xdg-dektop-portal-wlr > /dev/null 2>&1 &
-	(sleep 0.1 && swaybg  --image $HOME/.dotfiles/backgrounds/space-shuttle.png)&
+	(sleep 0.3 && swaybg  --image $HOME/.dotfiles/backgrounds/space-shuttle.png)&
 	$HOME/.dotfiles/bar/bar | dbus-run-session dwl
 fi
