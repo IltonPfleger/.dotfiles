@@ -3,14 +3,11 @@ title = "Console"
 dynamic_title=false
 decorations = "None"
 opacity = 0.9
+padding = {x=10,y=10}
 
 [font]
 normal = { family = "Fira Mono", style = "Regular" }
 size=10
-
-[colors.primary]
-background = '#1c1c1c'
-foreground = '#cccccc'
 
 [selection]
 save_to_clipboard = true
@@ -21,4 +18,33 @@ style = { shape = "Underline", blinking = "On" }
 [mouse]
 hide_when_typing = true
 
+[colors.primary]
+background = "#15141b"
+foreground = "#edecee"
 
+[colors.cursor]
+cursor = "#a277ff"
+
+[colors.selection]
+text = "CellForeground"
+background = "#29263c"
+
+[colors.normal]
+black = "#110f18"
+red = "#ff6767"
+green = "#61ffca"
+yellow = "#ffca85"
+blue = "#a277ff"
+magenta = "#a277ff"
+cyan = "#61ffca"
+white = "#edecee"
+
+[colors.bright]
+black = "#4d4d4d"
+red = "#ff6767"
+green = "#61ffca"
+yellow = "#ffca85"
+blue = "#a277ff"
+magenta = "#a277ff"
+cyan = "#61ffca"
+white = "#edecee"
