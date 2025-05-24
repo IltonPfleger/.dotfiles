@@ -59,11 +59,8 @@ alias clang-format='${HOME}/.dotfiles/bin/clang-format'
 #-----------------------------
 #Clipboard handling
 #----------------------------- 
-if command -v xclip &>/dev/null; then
-    alias c='wl-copy'
-    alias p='wl-paste'
-fi
-
+alias c='wl-copy'
+alias p='wl-paste'
 
 #-----------------------------
 # Git Integration
@@ -82,16 +79,5 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	export MOZ_ENABLE_WAYLAND=1
 	export XDG_SESSION_TYPE=wayland
 	export XDG_CURRENT_DESKTOP=sway
-
-	pkill -u "$USER" -fx /usr/bin/pipewire-pulse 1>/dev/null 2>&1
-	pkill -u "$USER" -fx /usr/bin/wireplumber 1>/dev/null 2>&1
-	pkill -u "$USER" -fx /usr/bin/pipewire 1>/dev/null 2>&1
-	/usr/bin/pipewire > /dev/null 2>&1 &
-	while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do sleep 1; done
-	/usr/bin/wireplumber > /dev/null 2>&1 &
-	/usr/bin/pipewire-pulse > /dev/null 2>&1 &
-	xdg-dektop-portal -r > /dev/null 2>&1 &
-	xdg-dektop-portal-wlr > /dev/null 2>&1 &
-	(sleep 0.3 && swaybg  --image $HOME/.dotfiles/backgrounds/space-shuttle.png)&
-	$HOME/.dotfiles/bar/bar | dbus-run-session dwl
+	$HOME/.dotfiles/bar/bar | dbus-run-session dwl -s 'autostart <&- >&-'
 fi

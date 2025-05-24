@@ -86,7 +86,7 @@ int main(int, char **)
 {
 	printf("{ \"version\": 1 }\n[\n");
 		while (true) {
-			printf(" %s | ", get_battery());
+			printf("  %s | ", get_battery());
 			printf("%s | ", get_backlight());
 			printf("%s | ", get_volume());
 			printf("%s", get_date_and_time());
