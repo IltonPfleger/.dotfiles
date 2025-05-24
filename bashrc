@@ -1,4 +1,5 @@
 #!/bin/bash
+[[ $- != *i* ]] && return
 
 #-----------------------------
 # Git Integration
@@ -51,6 +52,8 @@ export LIBVA_DRIVER_NAME=iHD
 export HISTCONTROL=ignoreboth
 export HISTSIZE=50
 export LANG="en_US.UTF-8"
+export EDITOR=vim
+export VIMINIT='source ${HOME}/.dotfiles/vim/main.vim'
 
 #-----------------------------
 # Firmware Tools
@@ -76,18 +79,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias lisha='ssh -J pfleger@ssh.lisha.ufsc.br pj@150.162.62.155 -X'
 alias lisha_ecu='ssh -J pfleger@ssh.lisha.ufsc.br lisha@150.162.62.227 -X'
-
-
-#-----------------------------
-#Vim
-#----------------------------- 
-export EDITOR=vim
-export VIMINIT='source ${HOME}/.dotfiles/vim/main.vim'
 alias clang-format='${HOME}/.dotfiles/bin/clang-format'
-
-#-----------------------------
-#Clipboard handling
-#----------------------------- 
 alias c='wl-copy'
 alias p='wl-paste'
 
