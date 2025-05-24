@@ -1,2 +1,2 @@
 all:
-	gcc -lX11 main.c -Wall -Wextra -o bar
+	gcc main.c -Wall -Wextra -o bar -O3

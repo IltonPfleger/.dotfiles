@@ -8,7 +8,8 @@ while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do sleep 1; done
 /usr/bin/pipewire-pulse &
 xdg-dektop-portal -r &
 xdg-dektop-portal-wlr &
-swayidle -w timeout 10 'loginctl suspend' &
+swayidle -w timeout 60 'loginctl suspend' &
 swaybg --image "$HOME/.dotfiles/backgrounds/space-shuttle.png" &
+updateBar
 
 

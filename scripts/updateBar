@@ -1,0 +1,3 @@
+#!/bin/bash
+pid=$(cat /tmp/bar.pid)
+kill -USR1 $pid
