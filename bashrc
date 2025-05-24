@@ -1,7 +1,46 @@
 #!/bin/bash
 
-# Return if not running interactively
-[[ $- != *i* ]] && return
+#-----------------------------
+# Git Integration
+#-----------------------------
+get_branch() {
+    local branch
+    branch=$(git branch --show-current 2>/dev/null)
+    [[ -n "$branch" ]] && echo " ${branch}"
+}
+
+#-----------------------------
+# Style
+#-----------------------------
+ART=$'\e[34m                  ▄
+                 ▄█▄
+                ▄███▄
+               ▄█████▄
+              ▄███████▄
+             ▄ ▀▀██████▄
+            ▄██▄▄ ▀█████▄
+           ▄█████████████▄
+          ▄███████████████▄
+         ▄█████████████████▄
+        ▄███████████████████▄
+       ▄█████████▀▀▀▀████████▄
+      ▄████████▀      ▀███████▄
+     ▄█████████        ████▀▀██▄
+    ▄██████████        █████▄▄▄
+   ▄██████████▀        ▀█████████▄
+  ▄██████▀▀▀              ▀▀██████▄
+ ▄███▀▀                       ▀▀███▄
+▄▀▀                               ▀▀▄\e[0m
+'
+BLUE='\[\e[34m\]'
+RED='\[\e[91;1m\]'
+RESET='\[\e[0m\]'
+while IFS= read -r line; do
+	echo -e "\033[34m${line}\033[0m"
+	sleep 0.005
+done <<< "$ART"
+PS1="${BLUE} \w :: \u@\H${RESET} :: ${RED}\$(get_branch)${RESET} > "
+
 
 #-----------------------------
 # Environment Variables
@@ -12,16 +51,6 @@ export LIBVA_DRIVER_NAME=iHD
 export HISTCONTROL=ignoreboth
 export HISTSIZE=50
 export LANG="en_US.UTF-8"
-
-#-----------------------------
-# Welcome Message
-#-----------------------------
-
-[[ -z "$SSH_CONNECTION" ]] && clear
-echo -e "Welcome back, \033[1;32m$USER!\033[0m"
-echo -e "System: \033[1;34m$(uname -srm)\033[0m"
-echo -e "Today is: \033[1;33m$(date '+%Y-%m-%d %H:%M:%S')\033[0m"
-echo -e "Uptime: \033[1;35m$(uptime -p)\033[0m"
 
 #-----------------------------
 # Firmware Tools
@@ -63,17 +92,8 @@ alias c='wl-copy'
 alias p='wl-paste'
 
 #-----------------------------
-# Git Integration
-#-----------------------------
-get_branch() {
-    local branch
-    branch=$(git branch --show-current 2>/dev/null)
-    [[ -n "$branch" ]] && echo "git:[${branch}]"
-}
-
-
-PS1='\[\e[38;5;27m\]pj\[\e[0m\] :: \[\e[38;5;27;1m\]\w\[\e[0m\] :: \[\e[91;1m\]$(get_branch)\[\e[0m\] > '
-
+#Start Wayland
+#----------------------------- 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	export PATH=$PATH:$HOME/.dotfiles/scripts/
 	export MOZ_ENABLE_WAYLAND=1

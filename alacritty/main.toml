@@ -8,6 +8,7 @@ padding = {x=10,y=10}
 [font]
 normal = { family = "Fira Mono", style = "Regular" }
 size=10
+builtin_box_drawing = true
 
 [selection]
 save_to_clipboard = true
