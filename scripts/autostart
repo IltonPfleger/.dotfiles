@@ -1,15 +1,21 @@
 #!/bin/bash
-pkill -u "$USER" -fx /usr/bin/pipewire-pulse
-pkill -u "$USER" -fx /usr/bin/wireplumber
-pkill -u "$USER" -fx /usr/bin/pipewire
-/usr/bin/pipewire&
-while [ "$(pgrep -f /usr/bin/pipewire)" = "" ] ; do sleep 1; done
-/usr/bin/wireplumber &
-/usr/bin/pipewire-pulse &
-xdg-dektop-portal -r &
-xdg-dektop-portal-wlr &
+exec <&-
+exec 1>/dev/null
+
+(
+	pkill -u "$USER" -fx /usr/bin/pipewire-pulse
+	pkill -u "$USER" -fx /usr/bin/wireplumber
+	pkill -u "$USER" -fx /usr/bin/pipewire
+	/usr/bin/pipewire &
+	while ! pgrep -f /usr/bin/pipewire > /dev/null; do sleep 1; done
+	/usr/bin/wireplumber &
+	/usr/bin/pipewire-pulse &
+) &
+
+xdg-desktop-portal -r &
+xdg-desktop-portal-wlr &
+
 swayidle -w timeout 300 'loginctl suspend' &
 swaybg --image "$HOME/.dotfiles/backgrounds/space-shuttle.png" &
-updateBar
 
-
+updatebar

@@ -16,7 +16,6 @@ depends=(
 'brightnessctl'
 'elogind-runit'
 'fcft'
-'firefox'
 'git'
 'grim'
 'slurp'

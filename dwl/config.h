@@ -133,11 +133,11 @@ static const char *menucmd[]      = {"launcher"};
 static const char *screenshotcmd[] ={"screenshot"};
 static const char *termcmd[]       = {"alacritty", "--config-file", "/home/pj/.dotfiles/alacritty/main.toml", NULL};
 static const char *rangercmd[]     = {"alacritty", "--config-file", "/home/pj/.dotfiles/alacritty/main.toml", "-e", "ranger", NULL};
-static const char *volumeup[]      = {"sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && /home/pj/.dotfiles/scripts/updateBar", NULL};
-static const char *volumedown[]    = {"sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && /home/pj/.dotfiles/scripts/updateBar", NULL};
-static const char *mutevolume[]    = {"sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && /home/pj/.dotfiles/scripts/updateBar", NULL};
-static const char *brupcmd[]       = {"sh", "-c", "brightnessctl set 5%+ && /home/pj/.dotfiles/scripts/updateBar", NULL};
-static const char *brdowncmd[]       = {"sh", "-c", "brightnessctl set 5%- && /home/pj/.dotfiles/scripts/updateBar", NULL};
+static const char *volumeup[]      = {"sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && /home/pj/.dotfiles/scripts/updatebar", NULL};
+static const char *volumedown[]    = {"sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && /home/pj/.dotfiles/scripts/updatebar", NULL};
+static const char *mutevolume[]    = {"sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && /home/pj/.dotfiles/scripts/updatebar", NULL};
+static const char *brupcmd[]       = {"sh", "-c", "brightnessctl set 5%+ && /home/pj/.dotfiles/scripts/updatebar", NULL};
+static const char *brdowncmd[]       = {"sh", "-c", "brightnessctl set 5%- && /home/pj/.dotfiles/scripts/updatebar", NULL};
 
 static const Key keys[] = {
 	{ 0,                         XKB_KEY_XF86AudioRaiseVolume, spawn, {.v = volumeup   } },
