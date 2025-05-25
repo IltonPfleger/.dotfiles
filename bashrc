@@ -90,6 +90,6 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	export PATH=$PATH:$HOME/.dotfiles/scripts/
 	export MOZ_ENABLE_WAYLAND=1
 	export XDG_SESSION_TYPE=wayland
-	export XDG_CURRENT_DESKTOP=sway
-	$HOME/.dotfiles/bar/bar | dbus-run-session dwl -s 'autostart <&- >&-'
+	export XDG_CURRENT_DESKTOP=dwl
+	$HOME/.dotfiles/bar/bar | dbus-run-session dwl -s 'autostart'
 fi
