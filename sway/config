@@ -16,7 +16,6 @@ set $bright_blue #83A598
 set $bright_magenta #D3869B
 set $bright_cyan #8EC07C
 set $bright_white #EBDBB2
-
 set $mod Mod4
 set $left h
 set $down j
@@ -25,6 +24,7 @@ set $right l
 set $term alacritty --config-file /home/pj/.dotfiles/alacritty/main.toml
 set $menu launcher
 set $wallpaper ~/.dotfiles/backgrounds/space-shuttle.png
+
 gaps outer 1
 gaps inner 8
 default_border pixel 2
@@ -109,8 +109,8 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && updatebar
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && updatebar
 bindsym Print exec screenshot
 
-output HDMI-A-1 mode 1920x1080@60Hz position 0 0
-output DP-1 mode 2560x1440@99.999Hz position 1920 0
+output DP-1 mode 2560x1440@99.999Hz position 0 0
+output HDMI-A-1 mode 1920x1080@60Hz position 2560 0
 output * bg $wallpaper fill
 
 bar {
