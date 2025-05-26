@@ -1,0 +1,28 @@
+#!/bin/bash
+source $HOME/.dotfiles/scripts/colors
+ALACRITTY="$HOME/.dotfiles/alacritty/main.toml"
+
+#[Alacritty]
+sed -i "/^\[colors\.primary\]/,/^\[/ s/^background.*/background = '$BG'/" ${ALACRITTY}
+sed -i "/^\[colors\.primary\]/,/^\[/ s/^foreground.*/foreground = '$FG'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^black.*/black = '$BLACK'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^red.*/red = '$RED'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^green.*/green = '$GREEN'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^yellow.*/yellow = '$YELLOW'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^blue.*/blue = '$BLUE'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^magenta.*/magenta = '$MAGENTA'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^cyan.*/cyan = '$CYAN'/" ${ALACRITTY}
+sed -i "/^\[colors\.normal\]/,/^\[/ s/^white.*/white = '$WHITE'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^black.*/black = '$BRIGHT_BLACK'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^red.*/red = '$BRIGHT_RED'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^green.*/green = '$BRIGHT_GREEN'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^yellow.*/yellow = '$BRIGHT_YELLOW'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^blue.*/blue = '$BRIGHT_BLUE'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^magenta.*/magenta = '$BRIGHT_MAGENTA'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^cyan.*/cyan = '$BRIGHT_CYAN'/" ${ALACRITTY}
+sed -i "/^\[colors\.bright\]/,/^\[/ s/^white.*/white = '$BRIGHT_WHITE'/" ${ALACRITTY}
+#[WMenu]
+
+
+
+
