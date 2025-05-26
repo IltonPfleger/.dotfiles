@@ -113,7 +113,6 @@ output DP-1 mode 2560x1440@99.999Hz position 0 0
 output HDMI-A-1 mode 1920x1080@60Hz position 2560 0
 output * bg $wallpaper fill
 
-for_window [app_id="blueman-manager"] floating enable
 for_window [app_id="nm-connection-editor"] floating enable
 for_window [class="Firefox" title="^Page Info"] floating enable
 for_window [class="Firefox" title="win0"] floating enable

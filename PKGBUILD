@@ -5,9 +5,6 @@ arch=('x86_64')
 depends=(
 'wmenu'
 'alacritty'
-'blueman'
-'bluez'
-'bluez-utils'
 'brightnessctl'
 'git'
 'grim'
