@@ -40,9 +40,10 @@ input type:touchpad {
 }
 
 exec swayidle -w \
-	timeout 30 "lock $wallpaper"\
+	timeout 60 "lock $wallpaper"\
 	timeout 300 'swaymsg "output * dpms off"; loginctl suspend' \
-	resume 'swaymsg "output * dpms on"'
+	resume 'swaymsg "output * dpms on"'\
+	before-sleep "lock $wallpaper"\
 
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
