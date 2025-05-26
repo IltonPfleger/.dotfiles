@@ -26,8 +26,8 @@ hi Normal guibg=NONE ctermbg=NONE
 "----------------------------------------------------------
 " Editing Behavior
 "----------------------------------------------------------
+set nospell
 set hidden
-set spell
 set autoindent
 set smartindent
 set noexpandtab
@@ -142,6 +142,3 @@ augroup compilation
   " JavaScript
   autocmd FileType javascript nnoremap <buffer> <F1> :w \| !node %<CR>
 augroup END
-
-" Remove deprecated configuration
-let c_no_curly_error=1

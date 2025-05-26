@@ -15,7 +15,4 @@ exec 1>/dev/null
 xdg-desktop-portal -r &
 xdg-desktop-portal-wlr &
 
-swayidle -w timeout 300 'loginctl suspend' &
-swaybg --image "$HOME/.dotfiles/backgrounds/space-shuttle.png" &
-
-updatebar
+dbus-run-session sway --config $HOME/.dotfiles/sway/config

@@ -89,18 +89,23 @@ int main(int, char **)
     fclose(file);
     sigset_t mask;
     struct timespec timeout;
-    timeout.tv_sec  = 60;
+    timeout.tv_sec  = 30;
     timeout.tv_nsec = 0;
     sigemptyset(&mask);
     sigaddset(&mask, SIGUSR1);
     sigprocmask(SIG_BLOCK, &mask, NULL);
 
-    printf("{ \"version\": 1 }\n[\n");
+	printf("{ \"version\": 1 }\n[\n");
+    bool first = true;
     while (true) {
-        printf("  %s | ", get_battery());
-        printf("%s | ", get_backlight());
-        printf("%s | ", get_volume());
-        printf("%s", get_date_and_time());
+        if (!first) printf(",\n");
+        first = false;
+        printf("[");
+        printf("{\"full_text\":\"%s\"},", get_battery());
+        printf("{\"full_text\":\"%s\"},", get_backlight());
+        printf("{\"full_text\":\"%s\"},", get_volume());
+        printf("{\"full_text\":\"%s\"}", get_date_and_time());
+        printf("]");
         fflush(stdout);
         sigtimedwait(&mask, NULL, &timeout);
     }

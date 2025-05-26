@@ -1,0 +1,127 @@
+set $bg #1d2021
+set $fg #ebdbb2
+set $black #282828
+set $red #CC241D
+set $green #98971A
+set $yellow #D79921
+set $blue #458588
+set $magenta #B16286
+set $cyan #689D6A
+set $white #A89984
+set $bright_black #928374
+set $bright_red #FB4934
+set $bright_green #B8BB26
+set $bright_yellow #FABD2F
+set $bright_blue #83A598
+set $bright_magenta #D3869B
+set $bright_cyan #8EC07C
+set $bright_white #EBDBB2
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty --config-file /home/pj/.dotfiles/alacritty/main.toml
+set $menu launcher
+set $wallpaper ~/.dotfiles/backgrounds/space-shuttle.png
+gaps outer 1
+gaps inner 8
+default_border pixel 2
+
+input "type:keyboard" {
+    xkb_layout br
+    xkb_variant abnt2
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+exec swayidle -w \
+	timeout 30 "lock $wallpaper"\
+	timeout 300 'swaymsg "output * dpms off"; loginctl suspend' \
+	resume 'swaymsg "output * dpms on"'
+
+bindsym $mod+Return exec $term
+bindsym $mod+q kill
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+c reload
+bindsym F12 exec lock $wallpaper
+bindsym $mod+Shift+q exec swaymsg exit
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Control+$left resize shrink width 50px
+bindsym $mod+Control+$right resize grow width 50px
+bindsym $mod+Control+$up resize grow height 50px
+bindsym $mod+Control+$down resize shrink height 50px
+bindsym $mod+Control+Left resize grow width 50px
+bindsym $mod+Control+Right resize shrink width 50px
+bindsym $mod+Control+Up resize grow height 50px
+bindsym $mod+Control+Down resize shrink height 50px
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+ && updatebar
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%- && updatebar
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle && updatebar
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle && updatebar
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && updatebar
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && updatebar
+bindsym Print exec screenshot
+
+output HDMI-A-1 mode 1920x1080@60Hz position 0 0
+output DP-1 mode 2560x1440@99.999Hz position 1920 0
+output * bg $wallpaper fill
+
+bar {
+	font "Fira Code 10"
+	height 20
+    position top
+	status_command ~/.dotfiles/bar/bar
+    colors {
+        statusline $fg
+		background $bg
+		focused_workspace $black $blue $fg
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+include /etc/sway/config.d/*

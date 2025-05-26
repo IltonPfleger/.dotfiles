@@ -1,6 +1,7 @@
 #!/bin/bash
 source $HOME/.dotfiles/scripts/colors
 ALACRITTY="$HOME/.dotfiles/alacritty/main.toml"
+SWAY="$HOME/.dotfiles/sway/config"
 
 #[Alacritty]
 sed -i "/^\[colors\.primary\]/,/^\[/ s/^background.*/background = '$BG'/" ${ALACRITTY}
@@ -21,7 +22,26 @@ sed -i "/^\[colors\.bright\]/,/^\[/ s/^blue.*/blue = '$BRIGHT_BLUE'/" ${ALACRITT
 sed -i "/^\[colors\.bright\]/,/^\[/ s/^magenta.*/magenta = '$BRIGHT_MAGENTA'/" ${ALACRITTY}
 sed -i "/^\[colors\.bright\]/,/^\[/ s/^cyan.*/cyan = '$BRIGHT_CYAN'/" ${ALACRITTY}
 sed -i "/^\[colors\.bright\]/,/^\[/ s/^white.*/white = '$BRIGHT_WHITE'/" ${ALACRITTY}
-#[WMenu]
+
+#[Sway]
+sed -i "s/^set \$bg.*/set \$bg $BG/" "$SWAY"
+sed -i "s/^set \$fg.*/set \$fg $FG/" "$SWAY"
+sed -i "s/^set \$black.*/set \$black $BLACK/" "$SWAY"
+sed -i "s/^set \$red.*/set \$red $RED/" "$SWAY"
+sed -i "s/^set \$green.*/set \$green $GREEN/" "$SWAY"
+sed -i "s/^set \$yellow.*/set \$yellow $YELLOW/" "$SWAY"
+sed -i "s/^set \$blue.*/set \$blue $BLUE/" "$SWAY"
+sed -i "s/^set \$magenta.*/set \$magenta $MAGENTA/" "$SWAY"
+sed -i "s/^set \$cyan.*/set \$cyan $CYAN/" "$SWAY"
+sed -i "s/^set \$white.*/set \$white $WHITE/" "$SWAY"
+sed -i "s/^set \$bright_black.*/set \$bright_black $BRIGHT_BLACK/" "$SWAY"
+sed -i "s/^set \$bright_red.*/set \$bright_red $BRIGHT_RED/" "$SWAY"
+sed -i "s/^set \$bright_green.*/set \$bright_green $BRIGHT_GREEN/" "$SWAY"
+sed -i "s/^set \$bright_yellow.*/set \$bright_yellow $BRIGHT_YELLOW/" "$SWAY"
+sed -i "s/^set \$bright_blue.*/set \$bright_blue $BRIGHT_BLUE/" "$SWAY"
+sed -i "s/^set \$bright_magenta.*/set \$bright_magenta $BRIGHT_MAGENTA/" "$SWAY"
+sed -i "s/^set \$bright_cyan.*/set \$bright_cyan $BRIGHT_CYAN/" "$SWAY"
+sed -i "s/^set \$bright_white.*/set \$bright_white $BRIGHT_WHITE/" "$SWAY"
 
 
 
