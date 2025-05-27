@@ -41,8 +41,7 @@ input type:touchpad {
 
 exec swayidle -w \
 	timeout 60 "lock $wallpaper"\
-	timeout 300 'swaymsg "output * dpms off"; loginctl suspend' \
-	resume 'swaymsg "output * dpms on"'\
+	timeout 300 'swaymsg "output * dpms off"; loginctl suspend' resume 'swaymsg "output * dpms on"'\
 	before-sleep "lock $wallpaper"\
 
 bindsym $mod+Return exec $term
@@ -114,8 +113,9 @@ output HDMI-A-1 mode 1920x1080@60Hz position 2560 0
 output * bg $wallpaper fill
 
 for_window [app_id="nm-connection-editor"] floating enable
-for_window [class="Firefox" title="^Page Info"] floating enable
-for_window [class="Firefox" title="win0"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="utility"] floating enable
 
 
 bar {
@@ -130,5 +130,5 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
-
+exec dbus-update-activation-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 include /etc/sway/config.d/*

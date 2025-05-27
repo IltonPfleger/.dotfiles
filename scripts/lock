@@ -1,6 +1,6 @@
 #!/bin/bash
 source colors
-swaylock -eFi "$1" \
+swaylock -efFi "$1" \
   --font-size 12 \
   --inside-color $BG \
   --inside-clear-color $YELLOW \
@@ -11,10 +11,9 @@ swaylock -eFi "$1" \
   --ring-ver-color $BLUE \
   --ring-wrong-color $RED \
   --line-color $BG \
-  --line-clear-color $YELLOW \
+  --line-clear-color $BG \
   --line-ver-color $BG \
-  --line-wrong-color $RED \
-  --separator-color $00000000 \
+  --line-wrong-color $BG \
   --text-color $FG \
   --text-clear-color $FG \
   --text-ver-color $FG \
@@ -28,4 +27,3 @@ swaylock -eFi "$1" \
   --indicator-caps-lock \
   --indicator-radius 75 \
   --indicator-thickness 7
-

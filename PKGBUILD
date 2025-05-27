@@ -28,5 +28,4 @@ depends=(
 'vim'
 'wl-clipboard'
 'wmenu'
-'xdg-desktop-portal'
 'xdg-desktop-portal-wlr')

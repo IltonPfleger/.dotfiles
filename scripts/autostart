@@ -7,12 +7,10 @@ exec 1>/dev/null
 	pkill -u "$USER" -fx /usr/bin/wireplumber
 	pkill -u "$USER" -fx /usr/bin/pipewire
 	/usr/bin/pipewire &
-	while ! pgrep -f /usr/bin/pipewire > /dev/null; do sleep 0.1; done
+	while ! pgrep -f /usr/bin/pipewire > /dev/null; do sleep 1; done
 	/usr/bin/wireplumber &
 	/usr/bin/pipewire-pulse &
 ) &
 
-xdg-desktop-portal -r &
-xdg-desktop-portal-wlr &
 
 dbus-run-session sway --config $HOME/.dotfiles/sway/config

@@ -88,8 +88,5 @@ alias p='wl-paste'
 #----------------------------- 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	export PATH=$PATH:$HOME/.dotfiles/scripts/
-	export MOZ_ENABLE_WAYLAND=1
-	export XDG_SESSION_TYPE=wayland
-	export XDG_CURRENT_DESKTOP=sway
 	exec autostart
 fi
