@@ -5,6 +5,30 @@
 #include <unistd.h>
 #include <signal.h>
 
+char *get_bluetooth()
+{
+    static char buffer[128];
+    FILE *file = popen("bluetoothctl show | grep -o 'Powered: yes'", "r");
+    if (!file) return "";
+    if (fgets(buffer, sizeof(buffer), file) == NULL) {
+        pclose(file);
+        return "";
+    }
+    pclose(file);
+    if (strlen(buffer) == 0) {
+        return "";
+    }
+
+    file = popen("bluetoothctl devices Connected", "r");
+    if (!file) return "";
+    if (fgets(buffer, sizeof(buffer), file) != NULL && strlen(buffer) > 0) {
+        pclose(file);
+        return "";
+    }
+    pclose(file);
+    return "";
+}
+
 char *get_battery()
 {
     static char str[32];
@@ -51,15 +75,6 @@ char *get_backlight()
     return str;
 }
 
-char *get_date_and_time()
-{
-    static char str[64];
-    time_t t           = time(NULL);
-    struct tm *tm_info = localtime(&t);
-    strftime(str, sizeof(str), " %A, %B %d, %Y |  %H:%M", tm_info);
-    return str;
-}
-
 char *get_volume()
 {
     static char str[8];
@@ -82,6 +97,24 @@ char *get_volume()
     return str;
 }
 
+char *get_date()
+{
+    static char str[64];
+    time_t t           = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    strftime(str, sizeof(str), " %A, %B %d, %Y", tm_info);
+    return str;
+}
+
+char *get_time()
+{
+    static char str[16];
+    time_t t           = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    strftime(str, sizeof(str), " %H:%M", tm_info);
+    return str;
+}
+
 int main(int, char **)
 {
     FILE *file = fopen("/tmp/bar.pid", "w");
@@ -95,16 +128,18 @@ int main(int, char **)
     sigaddset(&mask, SIGUSR1);
     sigprocmask(SIG_BLOCK, &mask, NULL);
 
-	printf("{ \"version\": 1 }\n[\n");
+    printf("{ \"version\": 1 }\n[\n");
     bool first = true;
     while (true) {
         if (!first) printf(",\n");
         first = false;
         printf("[");
+        printf("{\"full_text\":\"%s\"},", get_bluetooth());
         printf("{\"full_text\":\"%s\"},", get_battery());
         printf("{\"full_text\":\"%s\"},", get_backlight());
         printf("{\"full_text\":\"%s\"},", get_volume());
-        printf("{\"full_text\":\"%s\"}", get_date_and_time());
+        printf("{\"full_text\":\"%s\"},", get_date());
+        printf("{\"full_text\":\"%s\"}", get_time());
         printf("]");
         fflush(stdout);
         sigtimedwait(&mask, NULL, &timeout);
