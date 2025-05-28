@@ -7,21 +7,16 @@
 
 char *get_bluetooth()
 {
-    static char buffer[128];
-    FILE *file = popen("bluetoothctl show | grep -o 'Powered: yes'", "r");
+    FILE *file = popen("timeout 0.05s bluetoothctl show | grep -o 'Powered: yes'", "r");
     if (!file) return "";
-    if (fgets(buffer, sizeof(buffer), file) == NULL) {
+    if (fgetc(file) == EOF) {
         pclose(file);
         return "";
     }
-    pclose(file);
-    if (strlen(buffer) == 0) {
-        return "";
-    }
-
-    file = popen("bluetoothctl devices Connected", "r");
+	pclose(file);
+    file = popen("timeout 0.05s bluetoothctl devices Connected", "r");
     if (!file) return "";
-    if (fgets(buffer, sizeof(buffer), file) != NULL && strlen(buffer) > 0) {
+    if (fgetc(file) != EOF) {
         pclose(file);
         return "";
     }
@@ -78,8 +73,8 @@ char *get_backlight()
 char *get_volume()
 {
     static char str[8];
-    static char const *NO_AUDIO = "";
-    FILE *file                  = popen("wpctl get-volume @DEFAULT_SINK@", "r");
+    static char const *NO_AUDIO = "";
+    FILE *file                  = popen("timeout 0.05s wpctl get-volume @DEFAULT_SINK@", "r");
     char buffer[128];
 
     if (fgets(buffer, sizeof(buffer), file) == NULL) {
