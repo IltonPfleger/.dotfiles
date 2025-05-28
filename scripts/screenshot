@@ -4,4 +4,5 @@ REGION=$(slurp)
 if [ -n "$REGION" ]; then
     FILENAME=~/Pictures/Screenhot-$(date +%d-%B-%Y-%H\:%M\:%S).png
     grim -g "$REGION" "$FILENAME"
+	wl-copy --type image/png < "$FILENAME"
 fi

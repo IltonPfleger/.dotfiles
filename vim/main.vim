@@ -74,6 +74,8 @@ nnoremap <silent> w :w<CR>
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap vv <C-v><CR>
+vnoremap <leader>y :w !wl-copy<CR><CR>
+nnoremap <leader>p :r !wl-paste<CR>
 
 "----------------------------------------------------------
 " Replace command
