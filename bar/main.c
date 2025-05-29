@@ -4,6 +4,43 @@
 #include <time.h>
 #include <unistd.h>
 #include <signal.h>
+#include <dirent.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+char str[32];
+
+char *get_internet()
+{
+	str[0] = '\0';
+    char path[512];
+    struct dirent *entry;
+    DIR *ifs = opendir("/sys/class/net");
+    while ((entry = readdir(ifs)) != NULL) {
+        char *ifname = entry->d_name;
+        if (ifname[0] == '.') continue;
+        if (ifname[0] == 'l' && ifname[1] == 'o') continue;
+
+        sprintf(path, "/sys/class/net/%s/carrier", ifname);
+        FILE *carrier = fopen(path, "r");
+
+        if (fgetc(carrier) == '1') {
+            sprintf(path, "/sys/class/net/%s/wireless", ifname);
+            DIR *wireless = opendir(path);
+            if (wireless) {
+                closedir(wireless);
+                strcat(str, "  ");
+            } else {
+                strcat(str, "  ");
+            }
+        }
+        fclose(carrier);
+    }
+    closedir(ifs);
+    return str;
+}
 
 char *get_bluetooth()
 {
@@ -13,7 +50,7 @@ char *get_bluetooth()
         pclose(file);
         return "";
     }
-	pclose(file);
+    pclose(file);
     file = popen("timeout 0.05s bluetoothctl devices Connected", "r");
     if (!file) return "";
     if (fgetc(file) != EOF) {
@@ -26,7 +63,6 @@ char *get_bluetooth()
 
 char *get_battery()
 {
-    static char str[32];
     int battery;
     FILE *file = fopen("/sys/class/power_supply/BAT1/capacity", "r");
     if (file == NULL) {
@@ -57,7 +93,6 @@ char *get_battery()
 char *get_backlight()
 {
     static const int max_backlight = 96000;
-    static char str[16];
     int backlight;
     FILE *file = fopen("/sys/class/backlight/intel_backlight/brightness", "r");
     if (file == NULL) {
@@ -72,7 +107,6 @@ char *get_backlight()
 
 char *get_volume()
 {
-    static char str[8];
     static char const *NO_AUDIO = "";
     FILE *file                  = popen("timeout 0.05s wpctl get-volume @DEFAULT_SINK@", "r");
     char buffer[128];
@@ -94,7 +128,6 @@ char *get_volume()
 
 char *get_date()
 {
-    static char str[64];
     time_t t           = time(NULL);
     struct tm *tm_info = localtime(&t);
     strftime(str, sizeof(str), " %A, %B %d, %Y", tm_info);
@@ -103,7 +136,6 @@ char *get_date()
 
 char *get_time()
 {
-    static char str[16];
     time_t t           = time(NULL);
     struct tm *tm_info = localtime(&t);
     strftime(str, sizeof(str), " %H:%M", tm_info);
@@ -124,18 +156,16 @@ int main(int, char **)
     sigprocmask(SIG_BLOCK, &mask, NULL);
 
     printf("{ \"version\": 1 }\n[\n");
-    bool first = true;
     while (true) {
-        if (!first) printf(",\n");
-        first = false;
         printf("[");
+        printf("{\"full_text\":\"%s\"},", get_internet());
         printf("{\"full_text\":\"%s\"},", get_bluetooth());
         printf("{\"full_text\":\"%s\"},", get_battery());
         printf("{\"full_text\":\"%s\"},", get_backlight());
         printf("{\"full_text\":\"%s\"},", get_volume());
         printf("{\"full_text\":\"%s\"},", get_date());
         printf("{\"full_text\":\"%s\"}", get_time());
-        printf("]");
+        printf("],\n");
         fflush(stdout);
         sigtimedwait(&mask, NULL, &timeout);
     }
