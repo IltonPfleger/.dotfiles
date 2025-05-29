@@ -44,21 +44,19 @@ char *get_internet()
 
 char *get_bluetooth()
 {
-    FILE *file = popen("timeout 0.05s bluetoothctl show | grep -o 'Powered: yes'", "r");
-    if (!file) return "";
-    if (fgetc(file) == EOF) {
-        pclose(file);
-        return "";
+    str[0]     = '\0';
+    FILE *file = popen(
+        "timeout 0.05s bluetoothctl show 2>/dev/null | grep -q 'Powered: yes' && (timeout 0.05s bluetoothctl devices "
+        "Connected 2>/dev/null | grep "
+        "-q . && echo '' || echo '')",
+        "r");
+    if (file) {
+        if (fgets(str, sizeof(str), file)) {
+            str[strcspn(str, "\n")] = '\0';
+        };
     }
     pclose(file);
-    file = popen("timeout 0.05s bluetoothctl devices Connected", "r");
-    if (!file) return "";
-    if (fgetc(file) != EOF) {
-        pclose(file);
-        return "";
-    }
-    pclose(file);
-    return "";
+    return str;
 }
 
 char *get_battery()
@@ -107,39 +105,24 @@ char *get_backlight()
 
 char *get_microphone()
 {
-    static char MIC[] = " ";
-    static char MUTE[] = "";
-    FILE *file              = popen("grep -r --include=status -m1 -v closed /proc/asound/", "r");
-    if (!file) return "";
-    if (fgetc(file) == EOF) {
-        pclose(file);
-        return "";
+    FILE *file = popen(
+        "pactl get-source-mute @DEFAULT_SOURCE@ 2>/dev/null | grep -q 'Mute: yes' && echo '' || "
+        "(pactl get-source-volume @DEFAULT_SOURCE@ 2>/dev/null | grep -o '[0-9]*%' | head -n1 | "
+        "sed 's/^/ /' 2>/dev/null)",
+        "r");
+    if (file) {
+        if (fgets(str, sizeof(str), file)) {
+            str[strcspn(str, "\n")] = '\0';
+        };
     }
     pclose(file);
-
-	file = popen("pactl get-source-mute @DEFAULT_SOURCE@ | grep \"Mute: yes\"", "r");
-	if(fgetc(file) != EOF) {
-		pclose(file);
-		return MUTE;
-	}
-	pclose(file);
-
-    file = popen("pactl get-source-volume @DEFAULT_SOURCE@ | grep -o '[0-9]*%' | head -n1", "r");
-    if (!file) return "";
-    str[0] = '\0';
-    strcat(str, MIC);
-    if (fgets(str + sizeof(MIC) - 1, 5, file) == NULL) {
-        pclose(file);
-        return "";
-    }
-    *(str + sizeof(MIC) - 1 + 4) = '\0';
     return str;
 }
 
 char *get_volume()
 {
     static char MUTE[] = "";
-    FILE *file               = popen("wpctl get-volume @DEFAULT_SINK@", "r");
+    FILE *file         = popen("wpctl get-volume @DEFAULT_SINK@", "r");
     if (!file) return "";
     if (fgets(str, sizeof(str), file) == NULL) {
         pclose(file);
@@ -153,7 +136,7 @@ char *get_volume()
     if (sscanf(str, "Volume: %f", &volume) == 1 && !muted)
         sprintf(str, " %d%%", (int)(volume * 100));
     else
-		return MUTE;
+        return MUTE;
     return str;
 }
 
@@ -180,7 +163,7 @@ int main(int, char **)
     fclose(file);
     sigset_t mask;
     struct timespec timeout;
-    timeout.tv_sec  = 30;
+    timeout.tv_sec  = 40;
     timeout.tv_nsec = 0;
     sigemptyset(&mask);
     sigaddset(&mask, SIGUSR1);
