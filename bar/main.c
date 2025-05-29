@@ -10,11 +10,11 @@
 #include <string.h>
 #include <dirent.h>
 
-char str[32];
+char str[64];
 
 char *get_internet()
 {
-	str[0] = '\0';
+    str[0] = '\0';
     char path[512];
     struct dirent *entry;
     DIR *ifs = opendir("/sys/class/net");
@@ -105,24 +105,55 @@ char *get_backlight()
     return str;
 }
 
+char *get_microphone()
+{
+    static char MIC[] = " ";
+    static char MUTE[] = "";
+    FILE *file              = popen("grep -r --include=status -m1 -v closed /proc/asound/", "r");
+    if (!file) return "";
+    if (fgetc(file) == EOF) {
+        pclose(file);
+        return "";
+    }
+    pclose(file);
+
+	file = popen("pactl get-source-mute @DEFAULT_SOURCE@ | grep \"Mute: yes\"", "r");
+	if(fgetc(file) != EOF) {
+		pclose(file);
+		return MUTE;
+	}
+	pclose(file);
+
+    file = popen("pactl get-source-volume @DEFAULT_SOURCE@ | grep -o '[0-9]*%' | head -n1", "r");
+    if (!file) return "";
+    str[0] = '\0';
+    strcat(str, MIC);
+    if (fgets(str + sizeof(MIC) - 1, 5, file) == NULL) {
+        pclose(file);
+        return "";
+    }
+    *(str + sizeof(MIC) - 1 + 4) = '\0';
+    return str;
+}
+
 char *get_volume()
 {
-    static char const *NO_AUDIO = "";
-    FILE *file                  = popen("timeout 0.05s wpctl get-volume @DEFAULT_SINK@", "r");
-    char buffer[128];
-
-    if (fgets(buffer, sizeof(buffer), file) == NULL) {
-        strcpy(str, NO_AUDIO);
-    } else {
-        float volume = 0.0f;
-        int muted    = strstr(buffer, "MUTED") != NULL;
-        if (sscanf(buffer, "Volume: %f", &volume) == 1 && !muted)
-            sprintf(str, " %d%%", (int)(volume * 100));
-        else
-            strcpy(str, NO_AUDIO);
+    static char MUTE[] = "";
+    FILE *file               = popen("wpctl get-volume @DEFAULT_SINK@", "r");
+    if (!file) return "";
+    if (fgets(str, sizeof(str), file) == NULL) {
+        pclose(file);
+        return MUTE;
     }
-
     pclose(file);
+
+    float volume = 0.0f;
+    int muted    = strstr(str, "MUTED") != NULL;
+
+    if (sscanf(str, "Volume: %f", &volume) == 1 && !muted)
+        sprintf(str, " %d%%", (int)(volume * 100));
+    else
+		return MUTE;
     return str;
 }
 
@@ -163,6 +194,7 @@ int main(int, char **)
         printf("{\"full_text\":\"%s\"},", get_battery());
         printf("{\"full_text\":\"%s\"},", get_backlight());
         printf("{\"full_text\":\"%s\"},", get_volume());
+        printf("{\"full_text\":\"%s\"},", get_microphone());
         printf("{\"full_text\":\"%s\"},", get_date());
         printf("{\"full_text\":\"%s\"}", get_time());
         printf("],\n");

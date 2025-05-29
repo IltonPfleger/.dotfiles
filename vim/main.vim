@@ -104,7 +104,7 @@ augroup language_support
   " Function For Call Clang-Format
   function! ClangFormat() range
 	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
-	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, AlignConsecutiveAssignments: true, ColumnLimit: 180, BreakBeforeBraces: Linux, IndentPPDirectives: AfterHash}"'
+	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, AlignConsecutiveAssignments: true, ColumnLimit: 120, BreakBeforeBraces: Linux, IndentPPDirectives: AfterHash}"'
 	  let l:lines = getline(1, '$')
 	  let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*#', '//AA#', '')})
 	  let l:text = join(l:lines, "\n")

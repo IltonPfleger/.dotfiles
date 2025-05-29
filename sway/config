@@ -103,7 +103,9 @@ bindsym $mod+space focus mode_toggle
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+ && updatebar
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%- && updatebar
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle && updatebar
-bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle && updatebar
+bindsym F8 exec pactl set-source-volume @DEFAULT_SOURCE@ +5% && updatebar
+bindsym F7 exec pactl set-source-volume @DEFAULT_SOURCE@ -5% && updatebar
+bindsym F6 exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && updatebar
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && updatebar
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && updatebar
 bindsym Print exec screenshot
