@@ -104,9 +104,9 @@ augroup language_support
   " Function For Call Clang-Format
   function! ClangFormat() range
 	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
-	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, AlignConsecutiveAssignments: true, ColumnLimit: 120, BreakBeforeBraces: Linux, IndentPPDirectives: AfterHash}"'
+	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, UseTab: Never, AlignConsecutiveAssignments: true}"'
 	  let l:lines = getline(1, '$')
-	  let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*#', '//AA#', '')})
+	  let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*#', '//__FLAG__#', '')})
 	  let l:text = join(l:lines, "\n")
 	  let l:current_line = getpos('.')
 
@@ -114,7 +114,7 @@ augroup language_support
 	  let l:formatted_text = system(l:command, l:text)
 
 	  let l:formatted_lines = split(l:formatted_text, "\n")
-	  let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//\ AA#', '#', '')})
+	  let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//__FLAG__#', '#', '')})
 
 	  if v:shell_error != 0
 		  echoerr "ERROR: ClangFormat Failed!"
@@ -134,9 +134,9 @@ augroup END
 augroup compilation
   autocmd!
   " C, C++
-  autocmd FileType c nnoremap <F1> :w \| :!gcc -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
-  autocmd FileType cpp nnoremap <F1> :w \| :!g++ -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
-  autocmd FileType c,cpp nnoremap <F2> :w \|:!make<CR>
+  autocmd FileType c nnoremap <leader>r :w \| :!gcc -Iinclude -Wall -Wextra -g % -o %:r && ./%:r<CR>
+  autocmd FileType cpp nnoremap <leader>r :w \| :!g++ -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
+  autocmd FileType c,cpp nnoremap <leader>m :w \|:!make<CR>
 
   " Python
   autocmd FileType python nnoremap <buffer> <F1> :w \| !python3 %<CR>
