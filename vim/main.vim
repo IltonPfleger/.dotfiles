@@ -106,7 +106,7 @@ augroup language_support
 	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
 	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, UseTab: Never, AlignConsecutiveAssignments: true}"'
 	  let l:lines = getline(1, '$')
-	  let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*#', '//__FLAG__#', '')})
+	  let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*\([a-zA-Z ]*:\)', '\= "//__XXX__" . submatch(1)', '')})
 	  let l:text = join(l:lines, "\n")
 	  let l:current_line = getpos('.')
 
@@ -114,7 +114,7 @@ augroup language_support
 	  let l:formatted_text = system(l:command, l:text)
 
 	  let l:formatted_lines = split(l:formatted_text, "\n")
-	  let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//__FLAG__#', '#', '')})
+	  let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//__XXX__', '', '')})
 
 	  if v:shell_error != 0
 		  echoerr "ERROR: ClangFormat Failed!"
