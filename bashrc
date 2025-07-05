@@ -82,6 +82,7 @@ alias lisha_ecu='ssh -J pfleger@ssh.lisha.ufsc.br lisha@150.162.62.227 -X'
 alias clang-format='${HOME}/.dotfiles/bin/clang-format'
 alias c='wl-copy'
 alias p='wl-paste'
+bind 'set completion-ignore-case on'
 
 #-----------------------------
 #Start Wayland

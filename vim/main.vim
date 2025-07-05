@@ -70,7 +70,7 @@ set statusline+=\ %c\ %l/%L\ %P\
 " Key Mappings
 "----------------------------------------------------------
 nnoremap <silent> q :q<CR>
-nnoremap <silent> w :w<CR>
+nnoremap <silent> w :w<CR>zz
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap vv <C-v><CR>
@@ -104,9 +104,9 @@ augroup language_support
   " Function For Call Clang-Format
   function! ClangFormat() range
 	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
-	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, UseTab: Never, AlignConsecutiveAssignments: true}"'
+	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, UseTab: Never, AlignConsecutiveAssignments: true, ColumnLimit: 120, FixNamespaceComments: false, NamespaceIndentation: All}"'
 	  let l:lines = getline(1, '$')
-	  let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*\([a-zA-Z ]*:\)', '\= "//__XXX__" . submatch(1)', '')})
+	  "let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*\([a-zA-Z ]*:\)', '\= "//__XXX__" . submatch(1)', '')})
 	  let l:text = join(l:lines, "\n")
 	  let l:current_line = getpos('.')
 
@@ -114,7 +114,7 @@ augroup language_support
 	  let l:formatted_text = system(l:command, l:text)
 
 	  let l:formatted_lines = split(l:formatted_text, "\n")
-	  let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//__XXX__', '', '')})
+	  "let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//__XXX__', '', '')})
 
 	  if v:shell_error != 0
 		  echoerr "ERROR: ClangFormat Failed!"
