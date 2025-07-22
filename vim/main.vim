@@ -26,8 +26,8 @@ hi Normal guibg=NONE ctermbg=NONE
 "----------------------------------------------------------
 " Editing Behavior
 "----------------------------------------------------------
+set nospell
 set hidden
-set spell
 set autoindent
 set smartindent
 set noexpandtab
@@ -40,7 +40,6 @@ set softtabstop=4
 "----------------------------------------------------------
 set hlsearch
 nnoremap <silent> <Esc> :noh<CR>
-
 
 "----------------------------------------------------------
 " File Management
@@ -71,10 +70,12 @@ set statusline+=\ %c\ %l/%L\ %P\
 " Key Mappings
 "----------------------------------------------------------
 nnoremap <silent> q :q<CR>
-nnoremap <silent> w :w<CR>
+nnoremap <silent> w :w<CR>zz
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap vv <C-v><CR>
+vnoremap <leader>y :w !wl-copy<CR><CR>
+nnoremap <leader>p :r !wl-paste<CR>
 
 "----------------------------------------------------------
 " Replace command
@@ -90,57 +91,56 @@ inoremap <expr> <Tab> getline('.')[col('.')-2] !~ '^\s\?$' \|\| pumvisible() ? '
 " Back to line when exit
 "----------------------------------------------------------
 autocmd BufReadPost *
-			\ if line("'\"") > 0 && line("'\"") <= line("$") |
-			\   exe "normal! g`\"" |
-			\ endif
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
 
 "----------------------------------------------------------
 " Language-Specific Configuration
 "----------------------------------------------------------
 augroup language_support
-	autocmd!
-	" C
-	function! ClangFormat() range
-		let l:binary = '/home/pj/.dotfiles/bin/clang-format'
-		let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, AlignConsecutiveAssignments: true, ColumnLimit: 180, BreakBeforeBraces: Linux}"'
-		let l:start_line = line("'<")
-		let l:end_line = line("'>")
-		let l:lines = getline(1, '$')
-		let l:text = join(l:lines, "\n")
-		let l:current_line = getpos('.')
+  autocmd!
+  " C/C++
+  " Function For Call Clang-Format
+  function! ClangFormat() range
+	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
+	  let l:style = ' --style="{BasedOnStyle: Google, IndentWidth: 4, UseTab: Never, AlignConsecutiveAssignments: true, ColumnLimit: 120, FixNamespaceComments: false, NamespaceIndentation: All}"'
+	  let l:lines = getline(1, '$')
+	  "let l:lines = map(l:lines, {_, v -> substitute(v, '^\s*\([a-zA-Z ]*:\)', '\= "//__XXX__" . submatch(1)', '')})
+	  let l:text = join(l:lines, "\n")
+	  let l:current_line = getpos('.')
 
-		let l:command = l:binary . l:style . ' -assume-filename=' . expand('%:p')
-		let l:formatted_text = system(l:command, l:text)
+	  let l:command = l:binary . l:style . ' -assume-filename=' . expand('%:p')
+	  let l:formatted_text = system(l:command, l:text)
 
-		if v:shell_error != 0
-			echoerr "ERROR: ClangFormat Failed!"
-			return
-		endif
+	  let l:formatted_lines = split(l:formatted_text, "\n")
+	  "let l:formatted_lines = map(l:formatted_lines, {_, v -> substitute(v, '//__XXX__', '', '')})
 
-		let l:formatted_lines = split(l:formatted_text, "\n")
-		silent! execute '1,' . line('$') . 'delete _'
-		call setline(1, l:formatted_lines)
-		call setpos('.', l:current_line)
-	endfunction
-	autocmd FileType c,cpp,h,objc,objective-c nnoremap <buffer> <leader>= :call ClangFormat()<CR>
+	  if v:shell_error != 0
+		  echoerr "ERROR: ClangFormat Failed!"
+		  return
+	  endif
+
+	  silent! execute '1,' . line('$') . 'delete _'
+	  call setline(1, l:formatted_lines)
+	  call setpos('.', l:current_line)
+  endfunction
+  autocmd FileType c,cpp,h,objc,objective-c nnoremap <buffer> <leader>= :call ClangFormat()<CR>zz
 augroup END
 
 "----------------------------------------------------------
 " Compilation and Execution
 "----------------------------------------------------------
 augroup compilation
-	autocmd!
-	" C, C++
-	autocmd FileType c nnoremap <F1> :w \| :!gcc -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
-	autocmd FileType cpp nnoremap <F1> :w \| :!g++ -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
-	autocmd FileType c,cpp nnoremap <F2> :w \|:!make<CR>
+  autocmd!
+  " C, C++
+  autocmd FileType c nnoremap <leader>r :w \| :!gcc -Iinclude -Wall -Wextra -g % -o %:r && ./%:r<CR>
+  autocmd FileType cpp nnoremap <leader>r :w \| :!g++ -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
+  autocmd FileType c,cpp nnoremap <leader>m :w \|:!make<CR>
 
-	" Python
-	autocmd FileType python nnoremap <buffer> <F1> :w \| !python3 %<CR>
-
-	" JavaScript
-	autocmd FileType javascript nnoremap <buffer> <F1> :w \| !node %<CR>
+  " Python
+  autocmd FileType python nnoremap <buffer> <F1> :w \| !python3 %<CR>
+  
+  " JavaScript
+  autocmd FileType javascript nnoremap <buffer> <F1> :w \| !node %<CR>
 augroup END
-
-" Remove deprecated configuration
-let c_no_curly_error=1
