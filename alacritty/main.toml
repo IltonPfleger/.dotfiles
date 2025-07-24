@@ -15,7 +15,7 @@ foreground = '#cccccc'
 save_to_clipboard = true
 
 [cursor]
-style = { shape = "Underline", blinking = "On" }
+style = { shape = "Beam", blinking = "On" }
 
 [mouse]
 hide_when_typing = true
