@@ -1,21 +1,22 @@
-set $bg #1d2021
-set $fg #ebdbb2
-set $black #282828
-set $red #CC241D
-set $green #98971A
-set $yellow #D79921
-set $blue #458588
-set $magenta #B16286
-set $cyan #689D6A
-set $white #A89984
-set $bright_black #928374
-set $bright_red #FB4934
-set $bright_green #B8BB26
-set $bright_yellow #FABD2F
-set $bright_blue #83A598
-set $bright_magenta #D3869B
-set $bright_cyan #8EC07C
-set $bright_white #EBDBB2
+set $bg #000000
+set $fg #E6E6E6
+set $black #000000
+set $red #FF4C4C
+set $green #33FF99
+set $yellow #FFD93D
+set $blue #339CFF
+set $magenta #C873FF
+set $cyan #33FFF0
+set $white #E6E6E6
+set $bright_black #4D4D4D
+set $bright_red #FF6666
+set $bright_green #66FFB2
+set $bright_yellow #FFE866
+set $bright_blue #66B3FF
+set $bright_magenta #D78BFF
+set $bright_cyan #66FFF5
+set $bright_white #FFFFFF
+set $primary #FF4C4C
 set $mod Mod4
 set $left h
 set $down j
@@ -23,11 +24,11 @@ set $up k
 set $right l
 set $term alacritty --config-file /home/pj/.dotfiles/alacritty/main.toml
 set $menu launcher
-set $wallpaper ~/.dotfiles/backgrounds/space-shuttle.png
+set $wallpaper ~/.dotfiles/backgrounds/orange-amoled.jpg
 
 gaps outer 1
 gaps inner 8
-default_border pixel 2
+default_border pixel 1
 
 input "type:keyboard" {
     xkb_layout br
@@ -46,6 +47,7 @@ exec swayidle -w \
 
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
+bindsym $mod+e exec $term -e ranger
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym F12 exec lock $wallpaper
@@ -96,7 +98,7 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 bindsym $mod+b splith
 bindsym $mod+v splitv
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout toggle split
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
@@ -114,21 +116,20 @@ output DP-1 mode 2560x1440@99.999Hz position 0 0
 output HDMI-A-1 mode 1920x1080@60Hz position 2560 0
 output * bg $wallpaper fill
 
-for_window [app_id="nm-connection-editor"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="utility"] floating enable
-
-
+client.focused              $primary $black $fg $primary $primary
+client.focused_inactive     $bright_black $black $fg $bright_black $bright_black
+client.unfocused            $black $black $fg $black $black
+client.urgent               $red $black $fg $red $red
+client.placeholder           $black $black $fg $black $black
 bar {
 	font "Fira Code 10"
-	height 20
+	height 16
     position top
 	status_command ~/.dotfiles/bar/bar
     colors {
         statusline $fg
 		background $bg
-		focused_workspace $black $blue $fg
+		focused_workspace $black $primary $fg
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }

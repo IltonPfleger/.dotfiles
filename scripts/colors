@@ -1,20 +1,23 @@
 #!/bin/bash
-export BG='#1d2021'
-export FG='#ebdbb2'
-export BLACK='#282828'
-export RED='#CC241D'
-export GREEN='#98971A'
-export YELLOW='#D79921'
-export BLUE='#458588'
-export MAGENTA='#B16286'
-export CYAN='#689D6A'
-export WHITE='#A89984'
-export BRIGHT_BLACK='#928374'
-export BRIGHT_RED='#FB4934'
-export BRIGHT_GREEN='#B8BB26'
-export BRIGHT_YELLOW='#FABD2F'
-export BRIGHT_BLUE='#83A598'
-export BRIGHT_MAGENTA='#D3869B'
-export BRIGHT_CYAN='#8EC07C'
-export BRIGHT_WHITE='#EBDBB2'
-export PRIMARY=$BLUE
+
+export BLACK='#000000'
+export RED='#FF4C4C'
+export GREEN='#33FF99'
+export YELLOW='#FFD93D'
+export BLUE='#339CFF'
+export MAGENTA='#C873FF'
+export CYAN='#33FFF0'
+export WHITE='#E6E6E6'
+
+export BRIGHT_BLACK='#4D4D4D'
+export BRIGHT_RED='#FF6666'
+export BRIGHT_GREEN='#66FFB2'
+export BRIGHT_YELLOW='#FFE866'
+export BRIGHT_BLUE='#66B3FF'
+export BRIGHT_MAGENTA='#D78BFF'
+export BRIGHT_CYAN='#66FFF5'
+export BRIGHT_WHITE='#FFFFFF'
+
+export PRIMARY=$RED
+export BG=$BLACK
+export FG=$WHITE

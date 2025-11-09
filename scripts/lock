@@ -1,14 +1,14 @@
 #!/bin/bash
 source colors
 swaylock -efFi "$1" \
-  --font-size 12 \
+  --font-size 18 \
   --inside-color $BG \
   --inside-clear-color $YELLOW \
-  --inside-ver-color $BLUE \
+  --inside-ver-color $PRIMARY \
   --inside-wrong-color $RED \
   --ring-color $FG \
   --ring-clear-color $YELLOW \
-  --ring-ver-color $BLUE \
+  --ring-ver-color $PRIMARY \
   --ring-wrong-color $RED \
   --line-color $BG \
   --line-clear-color $BG \
@@ -18,12 +18,12 @@ swaylock -efFi "$1" \
   --text-clear-color $FG \
   --text-ver-color $FG \
   --text-wrong-color $FG \
-  --key-hl-color $BLUE \
+  --key-hl-color $PRIMARY \
   --bs-hl-color $RED \
   --layout-bg-color $BG \
   --layout-text-color $FG \
   --layout-border-color $FG \
   --indicator-idle-visible \
   --indicator-caps-lock \
-  --indicator-radius 75 \
+  --indicator-radius 100 \
   --indicator-thickness 7

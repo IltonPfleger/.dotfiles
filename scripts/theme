@@ -42,6 +42,7 @@ sed -i "s/^set \$bright_blue.*/set \$bright_blue $BRIGHT_BLUE/" "$SWAY"
 sed -i "s/^set \$bright_magenta.*/set \$bright_magenta $BRIGHT_MAGENTA/" "$SWAY"
 sed -i "s/^set \$bright_cyan.*/set \$bright_cyan $BRIGHT_CYAN/" "$SWAY"
 sed -i "s/^set \$bright_white.*/set \$bright_white $BRIGHT_WHITE/" "$SWAY"
+sed -i "s/^set \$primary.*/set \$primary $PRIMARY/" "$SWAY"
 
 
 
