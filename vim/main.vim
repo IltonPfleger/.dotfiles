@@ -100,30 +100,30 @@ autocmd BufReadPost *
 "----------------------------------------------------------
 augroup language_support
   autocmd!
-  " C/C++
-  " Function For Call Clang-Format
-  function! ClangFormat() range
-	  let l:binary = '/home/pj/.dotfiles/bin/clang-format'
-	  let l:style = ' --style="{BasedOnStyle: LLVM}"'
-	  let l:lines = getline(1, '$')
-	  let l:text = join(l:lines, "\n")
-	  let l:current_line = getpos('.')
+  
+  function! ClangFormat()
+    let l:binary = expand('~/.dotfiles/bin/clang-format')
+    let l:pos = getpos('.')
 
-	  let l:command = l:binary . l:style . ' -assume-filename=' . expand('%:p')
-	  let l:formatted_text = system(l:command, l:text)
+    " comando correto
+    let l:cmd = l:binary
+          \ . ' -style=file'
+          \ . ' -assume-filename=' . expand('%:p')
 
-	  let l:formatted_lines = split(l:formatted_text, "\n")
+    let l:output = system(l:cmd, join(getline(1, '$'), "\n"))
 
-	  if v:shell_error != 0
-		  echoerr "ERROR: ClangFormat Failed!"
-		  return
-	  endif
+    if v:shell_error
+      echoerr 'clang-format failed'
+      return
+    endif
 
-	  silent! execute '1,' . line('$') . 'delete _'
-	  call setline(1, l:formatted_lines)
-	  call setpos('.', l:current_line)
+    " substitui o buffer
+    silent! %delete _
+    call setline(1, split(l:output, "\n"))
+    call setpos('.', l:pos)
   endfunction
-  autocmd FileType c,cpp,h,objc,objective-c nnoremap <buffer> <leader>= :call ClangFormat()<CR>zz
+
+  autocmd FileType c,cpp,h,objc nnoremap <buffer> <leader>= :call ClangFormat()<CR>zz
 augroup END
 
 "----------------------------------------------------------

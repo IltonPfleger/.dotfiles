@@ -80,6 +80,7 @@ alias egrep='egrep --color=auto'
 alias lisha='ssh -J pfleger@ssh.lisha.ufsc.br pj@150.162.62.155 -X'
 alias lisha_ecu='ssh -J pfleger@ssh.lisha.ufsc.br lisha@150.162.62.227 -X'
 alias clang-format='${HOME}/.dotfiles/bin/clang-format'
+alias format="find . -type f \( -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) -exec $HOME/.dotfiles/bin/clang-format -i {} +"
 alias c='wl-copy'
 alias p='wl-paste'
 bind 'set completion-ignore-case on'
