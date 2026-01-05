@@ -1,5 +1,9 @@
+[Console]
+last-window-maximised=true
+last-window-size=(732, 528)
+
 [control-center]
-last-panel='multitasking'
+last-panel='background'
 window-state=(980, 640, false)
 
 [desktop/app-folders]
@@ -27,8 +31,8 @@ translate=true
 [desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/pj/.local/share/backgrounds/2025-05-19-21-20-48-may-the-force-be-with-you.jpg'
-picture-uri-dark='file:///home/pj/.local/share/backgrounds/2025-05-19-21-20-48-may-the-force-be-with-you.jpg'
+picture-uri='file:///home/pj/.local/share/backgrounds/2026-01-05-17-37-57-may-the-force-be-with-you.jpg'
+picture-uri-dark='file:///home/pj/.local/share/backgrounds/2026-01-05-17-37-57-may-the-force-be-with-you.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -53,7 +57,7 @@ two-finger-scrolling-enabled=true
 [desktop/screensaver]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/pj/.local/share/backgrounds/2025-05-19-21-20-48-may-the-force-be-with-you.jpg'
+picture-uri='file:///home/pj/.local/share/backgrounds/2026-01-05-17-37-57-may-the-force-be-with-you.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -138,7 +142,7 @@ custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybin
 
 [settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>Return'
-command='/home/pj/.dotfiles/alacritty/start.sh'
+command='kgx'
 name='Console'
 
 [settings-daemon/plugins/media-keys/custom-keybindings/custom1]
