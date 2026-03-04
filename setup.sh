@@ -2,7 +2,9 @@
 mv $HOME/.bashrc $HOME/bashrc.back
 ln -s $HOME/.dotfiles/bashrc $HOME/.bashrc
 ln -s $HOME/.dotfiles/clang-format $HOME/.clang-format
+ln -s $HOME/.dotfiles/gnome/extensions/ $HOME/.local/share/gnome-shell/extensions
 $HOME/.dotfiles/gnome/load.sh
+
 
 
 #Galaxy Book 3 
