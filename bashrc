@@ -47,24 +47,10 @@ PS1="${BLUE} \w :: \u@\H${RESET} :: ${RED}\$(get_branch)${RESET} > "
 # Environment Variables
 #-----------------------------
 export GTK_THEME=Adwaita:dark
-export LIBVA_DRIVERS_PATH=/usr/lib/dri
-export LIBVA_DRIVER_NAME=iHD
 export HISTCONTROL=ignoreboth
 export HISTSIZE=50
 export LANG="en_US.UTF-8"
 export EDITOR=vim
-export VIMINIT='source ${HOME}/.dotfiles/vim/main.vim'
-
-#-----------------------------
-# Firmware Tools
-#-----------------------------
-if [[ -f /sys/firmware/acpi/platform_profile ]]; then
-    alias mode='cat /sys/firmware/acpi/platform_profile'
-    alias low-power='echo low-power | sudo tee /sys/firmware/acpi/platform_profile'
-    alias quiet='echo quiet | sudo tee /sys/firmware/acpi/platform_profile'
-    alias balanced='echo balanced | sudo tee /sys/firmware/acpi/platform_profile'
-    alias performance='echo performance | sudo tee /sys/firmware/acpi/platform_profile'
-fi
 
 #-----------------------------
 # Aliases
@@ -78,9 +64,5 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias lisha='ssh -J pfleger@ssh.lisha.ufsc.br pj@150.162.62.155 -X'
-alias lisha_ecu='ssh -J pfleger@ssh.lisha.ufsc.br lisha@150.162.62.227 -X'
-alias clang-format='${HOME}/.dotfiles/bin/clang-format'
-alias format="find . -type f \( -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) -exec $HOME/.dotfiles/bin/clang-format -i {} +"
 alias c='wl-copy'
 alias p='wl-paste'
-bind 'set completion-ignore-case on'
