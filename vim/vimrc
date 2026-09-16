@@ -6,6 +6,7 @@ filetype indent on
 filetype plugin on
 set encoding=utf-8
 set shell=$SHELL
+set incsearch
 
 "----------------------------------------------------------
 " Visual Configuration
@@ -28,18 +29,13 @@ hi Normal guibg=NONE ctermbg=NONE
 "----------------------------------------------------------
 set nospell
 set hidden
+set noexpandtab
 set autoindent
 set smartindent
-set noexpandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-
-"----------------------------------------------------------
-" Search
-"----------------------------------------------------------
-set hlsearch
-nnoremap <silent> <Esc> :noh<CR>
+set confirm
 
 "----------------------------------------------------------
 " File Management
@@ -69,13 +65,22 @@ set statusline+=\ %c\ %l/%L\ %P\
 "----------------------------------------------------------
 " Key Mappings
 "----------------------------------------------------------
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 nnoremap <silent> q :q<CR>
 nnoremap <silent> w :w<CR>zz
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
-nnoremap vv <C-v><CR>
 vnoremap <leader>y :w !wl-copy<CR><CR>
 nnoremap <leader>p :r !wl-paste<CR>
+nnoremap vv <C-v><CR>
+inoremap jj <Esc>
 
 "----------------------------------------------------------
 " Replace command
@@ -96,40 +101,9 @@ autocmd BufReadPost *
      \ endif
 
 "----------------------------------------------------------
-" Compilation and Execution
-"----------------------------------------------------------
-augroup compilation
-  autocmd!
-  " C, C++
-  autocmd FileType c nnoremap <leader>r :w \| :!gcc -Iinclude -Wall -Wextra -g % -o %:r && ./%:r<CR>
-  autocmd FileType cpp nnoremap <leader>r :w \| :!g++ -Iinclude -Wall -Wextra % -o %:r && ./%:r<CR>
-  autocmd FileType c,cpp nnoremap <leader>m :w \|:!make<CR>
-
-  " Python
-  autocmd FileType python nnoremap <buffer> <F1> :w \| !python3 %<CR>
-  
-  " JavaScript
-  autocmd FileType javascript nnoremap <buffer> <F1> :w \| !node %<CR>
-augroup END
-
-"----------------------------------------------------------
 " ALE
 "----------------------------------------------------------
-let g:ale_linters = {
-\   'cpp': ['clangtidy'],
-\}
-
-let g:ale_fixers = {
-\   'cpp': ['clangtidy', 'clang-format'],
-\}
-
+"let g:ale_linters = {'cpp': ['clangd']}
+let g:ale_linters = {'cpp': []}
+let g:ale_fixers = {'cpp': ['clang-format']}
 let g:ale_fix_on_save = 1
-let g:ale_enabled = 1
-let g:ale_linters_explicit = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_save = 1
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
-let g:ale_echo_cursor = 1
-let g:ale_cpp_clangtidy_options = '-std=c++20'

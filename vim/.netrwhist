@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/home/pj/DEPOS/include/memory'
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/pj/TCC/sections/Introdução'
+let g:netrw_dirhist_5='/home/pj/Quark/payload/ABI'
+let g:netrw_dirhist_4='/home/pj/Quark/src/abi'
+let g:netrw_dirhist_3='/home/pj/Quark/architecture'
+let g:netrw_dirhist_2='/home/pj/Quark/.git'
+let g:netrw_dirhist_1='/home/pj/LISHA/HyperEPOS/EPOS/tests/elp_ethernet_test'
+let g:netrw_dirhist_0='/home/pj/Quark/machine/riscv64/VisionFive2/tools'
+let g:netrw_dirhist_9='/home/pj/Quark/payload/RTCSA2026/EPOS'
+let g:netrw_dirhist_8='/home/pj/TCC/sections/Introdução'
+let g:netrw_dirhist_7='/home/pj/LISHA/TCC/sections/Resultados'
